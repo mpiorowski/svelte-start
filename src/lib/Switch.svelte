@@ -1,23 +1,23 @@
 <script>
     /** @type {boolean} */
-	export let value;
+    export let value;
     /** @type {string} */
-	export let name;
+    export let name;
 </script>
 
 <input class="hidden" {name} {value} />
 <button
-	type="button"
-	class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2
+    type="button"
+    class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2
                     {value ? 'bg-indigo-600' : 'bg-neutral-600'}"
-	role="switch"
-	aria-checked={value}
-	on:click={() => (value = !value)}
+    role="switch"
+    aria-checked={value}
+    on:click={() => (value = !value)}
 >
-	<span class="sr-only">{name}</span>
-	<span
-		aria-hidden="true"
-		class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
+    <span class="sr-only">{name}</span>
+    <span
+        aria-hidden="true"
+        class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out
                         {value ? 'translate-x-5' : 'translate-x-0'}"
-	/>
+    />
 </button>
