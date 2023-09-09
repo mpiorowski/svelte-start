@@ -3,10 +3,7 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:svelte/recommended",
-        // additional jsdoc rules
-        "plugin:jsdoc/recommended",
     ],
-    plugins: ["jsdoc"],
     parserOptions: {
         sourceType: "module",
         ecmaVersion: 2020,

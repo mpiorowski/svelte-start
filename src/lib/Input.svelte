@@ -9,15 +9,18 @@
     export let type = "text";
     /** @type {string} */
     export let placeholder = "";
+    /** @type {import("./types").autocomplete} */
+    export let autocomplete = "off";
     /** @type {number} */
-    export let textarea = 0;
+    export let rows = 0;
     /** @type {string[]} */
     export let errors = [];
     /** @type {string} */
     export let helper = "\x80";
 
     /**
-     * @param {HTMLInputElement} node - The HTML input element
+     * @param {HTMLInputElement} node
+     * @returns {void}
      */
     function typeAction(node) {
         node.type = type;
@@ -29,27 +32,33 @@
         {label}
     </label>
     <div class="mt-2">
-        {#if textarea === 0}
+        {#if rows === 0}
             <input
                 use:typeAction
                 bind:value
-                {name}
                 id={name}
-                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                {name}
                 {placeholder}
+                {autocomplete}
+                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                aria-invalid={errors.length > 0}
+                aria-describedby="{name}-description"
             />
         {:else}
             <textarea
                 bind:value
-                {name}
                 id={name}
-                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                {name}
                 {placeholder}
-                rows={textarea}
+                {rows}
+                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                aria-invalid={errors.length > 0}
+                aria-describedby="{name}-description"
             />
         {/if}
     </div>
     <p
+        id="{name}-description"
         class="mt-2 text-sm leading-6
         {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
     >

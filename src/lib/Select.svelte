@@ -3,13 +3,15 @@
     import { fade } from "svelte/transition";
 
     /** @type {string} */
-    export let label;
-    /** @type {string} */
     export let name;
     /** @type {string} */
+    export let label;
+    /** @type {string} */
     export let value;
-    /** @type {string[]} */
+    /** @type {readonly string[]} */
     export let options;
+    /** @type {string} */
+    export let helper = "\x80";
 
     let active = 0;
     let open = false;
@@ -18,8 +20,8 @@
     }
 
     /**
-     * @param {HTMLElement} node - The HTML element
-     * @returns {{ destroy(): void }} - The destroy function
+     * @param {HTMLElement} node
+     * @returns {{ destroy(): void }}
      */
     function trapfocus(node) {
         const previous = document.activeElement;
@@ -28,8 +30,9 @@
         }
 
         /**
-         * @param {KeyboardEvent} event - The keyboard event
-         * @param {HTMLElement} previous - The previous HTML element
+         * @param {KeyboardEvent} event
+         * @param {HTMLElement} previous
+         * @returns {void}
          */
         function handleKeydown(event, previous) {
             if (event.key === "ArrowDown") {
@@ -53,7 +56,8 @@
         }
 
         /**
-         * @param {MouseEvent} event - The mouse event
+         * @param {MouseEvent} event
+         * @returns {void}
          */
         function handleClickOutside(event) {
             if (!(event.target instanceof Node)) {
@@ -82,8 +86,9 @@
 </script>
 
 <div>
+    <input type="hidden" name="{name}" value="{value}" />
     <label
-        id="listbox-{name}"
+        id="{name}-label"
         class="block text-sm font-medium leading-6 text-gray-900"
         for="listbox"
     >
@@ -94,7 +99,8 @@
             type="button"
             class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
             aria-haspopup="listbox"
-            aria-labelledby="listbox-{name}"
+            aria-labelledby="{name}-label"
+            aria-describedby="{name}-description"
             aria-expanded={open}
             on:click|stopPropagation={() => (open = !open)}
         >
@@ -124,7 +130,7 @@
                 class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 tabindex="-1"
                 role="listbox"
-                aria-labelledby="listbox-{name}"
+                aria-labelledby="{name}-label"
                 aria-activedescendant="listbox-option-{active}"
             >
                 {#each options as option, i}
@@ -174,4 +180,7 @@
             </ul>
         {/if}
     </div>
+    <p class="mt-2 text-sm leading-6 text-gray-500" id="{name}-description">
+        {helper}
+    </p>
 </div>
