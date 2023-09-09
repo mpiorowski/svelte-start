@@ -18,6 +18,9 @@
 
     /** @type {string} */
     let url;
+    $: if (file) {
+        url = URL.createObjectURL(file);
+    }
 </script>
 
 <div class="m-1">
@@ -32,6 +35,11 @@
         for={name}
         class="mt-2 flex cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition hover:bg-gray-200/25 focus:border-gray-900/25 focus:outline-none focus:ring-gray-900/25"
     >
+        <img
+            class="h-12 w-12 text-gray-300"
+            src={url}
+            alt=""
+        />
         <div class="text-center">
             <svg
                 class="mx-auto h-12 w-12 text-gray-300"
