@@ -164,7 +164,7 @@
                         name="photo"
                         label="Cover photo"
                         bind:file={user.photo}
-                        description="PNG, JPG, GIF up to 10MB"
+                        description="SVG, PNG, JPG, GIF up to 10MB"
                         accept="image/*"
                     />
                 </div>

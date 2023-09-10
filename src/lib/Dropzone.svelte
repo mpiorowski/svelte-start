@@ -10,16 +10,23 @@
     /** @type {string | undefined} */
     export let accept = "*/*";
 
+    /** @type {HTMLInputElement} */
+    let fileInput;
+
     /** @type {FileList} */
     let files;
     $: if (files && files[0]) {
         file = files[0];
+    } else {
+        file = undefined;
     }
 
     /** @type {string} */
     let url;
-    $: if (file) {
+    $: if (file && file?.size > 0) {
         url = URL.createObjectURL(file);
+    } else {
+        url = "";
     }
 </script>
 
@@ -33,43 +40,81 @@
     <label
         id={label}
         for={name}
-        class="mt-2 flex cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition hover:bg-gray-200/25 focus:border-gray-900/25 focus:outline-none focus:ring-gray-900/25"
+        class="relative mt-2 flex h-[200px] cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition hover:bg-gray-200/25 focus:border-gray-900/25 focus:outline-none focus:ring-gray-900/25"
     >
-        <img
-            class="h-12 w-12 text-gray-300"
-            src={url}
-            alt=""
+        <input
+            bind:this={fileInput}
+            bind:files
+            id={name}
+            {name}
+            {accept}
+            type="file"
+            class="sr-only"
         />
-        <div class="text-center">
-            <svg
-                class="mx-auto h-12 w-12 text-gray-300"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
+        {#if url}
+            <img
+                class="-mx-6 -my-10 object-cover text-gray-300"
+                src={url}
+                alt=""
+            />
+            <button
+                type="button"
+                class="absolute right-0 top-0 p-1 text-gray-900/50 hover:text-gray-900/75 focus:outline-none focus:ring-2 focus:ring-gray-900/25 focus:ring-offset-2"
+                on:click={(e) => {
+                    e.preventDefault();
+                    file = undefined;
+                    fileInput.value = "";
+                }}
             >
-                <path
-                    fill-rule="evenodd"
-                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                    clip-rule="evenodd"
-                />
-            </svg>
-            {#if file && file.size > 0}
-                <p class="mt-4 flex text-sm leading-6 text-gray-900">
-                    {file.name}
-                </p>
-                <p class="text-xs leading-5 text-gray-400">
-                    {file.size} bytes
-                </p>
-            {:else}
-                <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                    <span class="font-semibold">Upload a file</span>
-                    <p class="pl-1">or drag and drop</p>
-                </div>
-                <p class="text-xs leading-5 text-gray-400">
-                    {description}
-                </p>
-            {/if}
-        </div>
+                <span class="sr-only">Remove image</span>
+                <svg
+                    class="h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        {:else}
+            <div class="text-center">
+                <svg
+                    class="mx-auto h-12 w-12 text-gray-300"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+                {#if file && file.size > 0}
+                    <p class="mt-4 flex text-sm leading-6 text-gray-900">
+                        {file.name}
+                    </p>
+                    <p class="text-xs leading-5 text-gray-400">
+                        {file.size} bytes
+                    </p>
+                {:else}
+                    <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                        <span class="font-semibold">
+                            Click to upload an image
+                        </span>
+                    </div>
+                    <p class="text-xs leading-5 text-gray-400">
+                        {description}
+                    </p>
+                {/if}
+            </div>
+        {/if}
     </label>
-    <input bind:files id={name} {name} {accept} type="file" class="sr-only" />
 </div>
