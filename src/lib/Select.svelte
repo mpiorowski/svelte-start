@@ -89,21 +89,21 @@
     <label
         id="{name}-label"
         class="block text-sm font-medium leading-6 text-gray-900"
-        for="listbox"
+        for={name}
     >
         {label}
     </label>
     <div class="relative mt-2">
+        <input type="hidden" {name} {value} />
         <button
+            id={name}
             type="button"
             class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
             aria-haspopup="listbox"
-            aria-labelledby="{name}-label"
             aria-describedby="{name}-description"
             aria-expanded={open}
             on:click|stopPropagation={() => (open = !open)}
         >
-            <input type="hidden" {name} {value} />
             <span class="block truncate">{value}</span>
             <span
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
@@ -123,6 +123,16 @@
             </span>
         </button>
         {#if open}
+            <!--
+              Select popover, show/hide based on select state.
+
+              Entering: ""
+                From: ""
+                To: ""
+              Leaving: "transition ease-in duration-100"
+                From: "opacity-100"
+                To: "opacity-0"
+            -->
             <!--{open ? 'opacity-100' : 'opacity-0 transition duration-100 ease-in'}-->
             <ul
                 out:fade={{ duration: 100, easing: cubicIn }}
@@ -131,7 +141,7 @@
                 tabindex="-1"
                 role="listbox"
                 aria-labelledby="{name}-label"
-                aria-activedescendant="listbox-option-{active}"
+                aria-activedescendant="{name}-option-{active}"
             >
                 {#each options as option, i}
                     <!-- This one is dealt with by the trapfocus function -->
@@ -141,7 +151,7 @@
                     {active === i
                             ? 'bg-indigo-600 text-white'
                             : 'text-gray-900'}"
-                        id="listbox-option-{i}"
+                        id="{name}-option-{i}"
                         role="option"
                         aria-selected={option === value}
                         on:mouseenter={() => (active = i)}
@@ -180,7 +190,7 @@
             </ul>
         {/if}
     </div>
-    <p class="mt-2 text-sm leading-6 text-gray-500" id="{name}-description">
+    <p id="{name}-description" class="text-xs leading-6 text-gray-500">
         {helper}
     </p>
 </div>

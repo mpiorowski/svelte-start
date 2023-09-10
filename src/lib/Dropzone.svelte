@@ -9,6 +9,10 @@
     export let description;
     /** @type {string | undefined} */
     export let accept = "*/*";
+    /** @type {string[]} */
+    export let errors = [];
+    /** @type {string} */
+    export let helper = "\x80";
 
     /** @type {FileList} */
     let files;
@@ -28,14 +32,15 @@
 </script>
 
 <div>
-    <label for={name} class="block text-sm font-medium leading-6 text-gray-900">
+    <div class="block text-sm font-medium leading-6 text-gray-900">
         {label}
-    </label>
+    </div>
     <label
         id={label}
         for={name}
-        class="mt-2 flex h-[200px] cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10
-        hover:bg-gray-200/25 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2"
+        class="mt-2 flex h-[200px] cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25
+        focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:bg-gray-200/25
+        {errors.length > 0 ? 'ring-2 ring-red-600 ring-offset-2' : ''}"
     >
         <input
             bind:files
@@ -47,12 +52,12 @@
         />
         {#if url}
             <img
-                class="-mx-6 -my-10 object-cover text-gray-300"
+                class="w-full rounded object-cover text-gray-300"
                 src={url}
-                alt=""
+                alt={name}
             />
         {:else}
-            <div class="text-center">
+            <div class="flex flex-col justify-center text-center">
                 <svg
                     class="mx-auto h-12 w-12 text-gray-300"
                     viewBox="0 0 24 24"
@@ -78,11 +83,18 @@
                             Click to upload an image
                         </span>
                     </div>
-                    <p class="text-xs leading-5 text-gray-400">
+                    <p class="text-xs leading-5 text-gray-500">
                         {description}
                     </p>
                 {/if}
             </div>
         {/if}
     </label>
+    <p
+        id="{name}-description"
+        class="text-xs leading-6
+        {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
+    >
+        {errors.length > 0 ? errors.join(", ") : helper}
+    </p>
 </div>

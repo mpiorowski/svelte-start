@@ -8,6 +8,7 @@
     import Switch from "$lib/Switch.svelte";
     import Dropzone from "$lib/Dropzone.svelte";
     import FileInput from "$lib/FileInput.svelte";
+    import { toast } from "$lib/toast";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -20,18 +21,46 @@
         "none",
     ]);
     const shema = z.object({
-        username: z.string().min(3).max(20),
-        about: z.string().max(1000),
-        resume: z.instanceof(File),
-        coverPhoto: z.instanceof(File),
-        firstName: z.string().max(50),
-        lastName: z.string().max(50),
+        username: z.string().min(3, "Username is required").max(50),
+        about: z.string().min(3, "About is required").max(1000),
+        resume: z
+            .any()
+            .refine((file) => file instanceof File, "File is required")
+            .refine((file) => file.size > 0, "File is required")
+            .refine(
+                (file) => file.size < 5 * 1024 * 1024,
+                "File is too big, max 5MB",
+            )
+            .refine(
+                (file) => file.type === "application/pdf",
+                "File must be a PDF",
+            ),
+        coverPhoto: z
+            .any()
+            .refine((file) => file instanceof File, "File is required")
+            .refine((file) => file.size > 0, "File is required")
+            .refine(
+                (file) => file.size < 10 * 1024 * 1024,
+                "File is too big, max 10MB",
+            )
+            .refine(
+                (file) =>
+                    [
+                        "image/svg+xml",
+                        "image/png",
+                        "image/jpeg",
+                        "image/gif",
+                    ].includes(file.type),
+                "File must be an image",
+            ),
+        firstName: z.string().min(1, "First name is required").max(50),
+        lastName: z.string().min(1, "Last name is required").max(50),
         email: z.string().email(),
         country: z.enum(countries),
-        streetAddress: z.string().max(100),
-        city: z.string().max(50),
-        region: z.string().max(50),
-        postalCode: z.string().max(20),
+        streetAddress: z.string().min(1, "Street address is required").max(100),
+        city: z.string().min(1, "City is required").max(50),
+        region: z.string().min(1, "Region is required").max(50),
+        postalCode: z.string().min(1, "Postal code is required").max(20),
         comments: z.boolean(),
         candidates: z.boolean(),
         offers: z.boolean(),
@@ -45,18 +74,18 @@
      * @type {User}
      */
     let user = {
-        username: "janesmith",
-        about: "I love vacations and traveling.",
+        username: "",
+        about: "",
         resume: new File([""], ""),
         coverPhoto: new File([""], ""),
-        firstName: "Jane",
-        lastName: "Smith",
-        email: "janessmith@gmail.com",
+        firstName: "",
+        lastName: "",
+        email: "",
         country: countries[0],
-        streetAddress: "123 Main St.",
-        city: "San Francisco",
-        region: "CA",
-        postalCode: "94111",
+        streetAddress: "",
+        city: "",
+        region: "",
+        postalCode: "",
         comments: false,
         candidates: true,
         offers: true,
@@ -70,6 +99,7 @@
      * @returns {void}
      */
     function handleSubmit(event) {
+        fieldErrors = {};
         const form = new FormData(event.currentTarget);
         const valid = shema.safeParse({
             username: form.get("username"),
@@ -93,13 +123,24 @@
         });
         if (!valid.success) {
             const errors = valid.error.flatten().fieldErrors;
-            alert(JSON.stringify(errors, null, 2));
+            fieldErrors = errors;
+            const fieldsString = Object.keys(errors)
+                .map((field) => `"${field}"`)
+                .join(", ");
+            toast.error(
+                "Validation failed",
+                `Please check the following fields: ${fieldsString}`,
+            );
         } else {
             console.log(valid.data.resume);
             console.log(valid.data.coverPhoto);
-            alert(JSON.stringify(valid.data, null, 2));
+            console.log(valid.data);
+            toast.success("Saved", "Your profile has been updated.");
         }
     }
+
+    /** @type {Partial<Record<keyof User, string[]>>} */
+    let fieldErrors = {};
 </script>
 
 <form on:submit|preventDefault={handleSubmit} class="m-auto max-w-2xl p-10">
@@ -120,6 +161,7 @@
                         label="Username"
                         autocomplete="username"
                         bind:value={user.username}
+                        errors={fieldErrors.username ?? []}
                     />
                 </div>
 
@@ -130,6 +172,7 @@
                         bind:value={user.about}
                         rows={3}
                         helper="Write a few sentences about yourself."
+                        errors={fieldErrors.about ?? []}
                     />
                 </div>
 
@@ -139,6 +182,7 @@
                         name="resume"
                         bind:file={user.resume}
                         helper="PDF up to 5MB"
+                        errors={fieldErrors.resume ?? []}
                     />
                 </div>
 
@@ -149,6 +193,7 @@
                         bind:file={user.coverPhoto}
                         description="SVG, PNG, JPG, GIF up to 10MB"
                         accept="image/*"
+                        errors={fieldErrors.coverPhoto ?? []}
                     />
                 </div>
             </div>
@@ -169,6 +214,7 @@
                         label="First name"
                         autocomplete="given-name"
                         bind:value={user.firstName}
+                        errors={fieldErrors.firstName ?? []}
                     />
                 </div>
 
@@ -178,6 +224,7 @@
                         label="Last name"
                         autocomplete="family-name"
                         bind:value={user.lastName}
+                        errors={fieldErrors.lastName ?? []}
                     />
                 </div>
 
@@ -187,6 +234,7 @@
                         label="Email address"
                         autocomplete="email"
                         bind:value={user.email}
+                        errors={fieldErrors.email ?? []}
                     />
                 </div>
 
@@ -205,6 +253,7 @@
                         label="Street address"
                         bind:value={user.streetAddress}
                         autocomplete="street-address"
+                        errors={fieldErrors.streetAddress ?? []}
                     />
                 </div>
 
@@ -214,6 +263,7 @@
                         label="City"
                         bind:value={user.city}
                         autocomplete="address-level2"
+                        errors={fieldErrors.city ?? []}
                     />
                 </div>
 
@@ -223,6 +273,7 @@
                         label="State / Province"
                         bind:value={user.region}
                         autocomplete="address-level1"
+                        errors={fieldErrors.region ?? []}
                     />
                 </div>
 
@@ -232,6 +283,7 @@
                         label="ZIP / Postal"
                         bind:value={user.postalCode}
                         autocomplete="postal-code"
+                        errors={fieldErrors.postalCode ?? []}
                     />
                 </div>
             </div>

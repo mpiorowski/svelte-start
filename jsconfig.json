@@ -25,8 +25,8 @@
         "noFallthroughCasesInSwitch": true /* Enable error reporting for fallthrough cases in switch statements. */,
         "noUncheckedIndexedAccess": true /* Include 'undefined' in index signature results */,
         "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,
-        "exactOptionalPropertyTypes": false /* Interpret optional property types as written, rather than adding 'undefined'. */,
-        "noPropertyAccessFromIndexSignature": false /* Enforces using indexed accessors for keys declared using an indexed type */,
+        "exactOptionalPropertyTypes": true /* Interpret optional property types as written, rather than adding 'undefined'. */,
+        "noPropertyAccessFromIndexSignature": true /* Enforces using indexed accessors for keys declared using an indexed type */,
         "allowUnusedLabels": false /* Disable error reporting for unused labels. */,
         "allowUnreachableCode": false /* Disable error reporting for unreachable code. */
     }

@@ -8,7 +8,7 @@
 </script>
 
 <div class="flex items-center">
-    <input class="sr-only" {name} bind:checked type="checkbox" />
+    <input class="hidden" {name} bind:checked type="checkbox" />
     <button
         on:click={() => (checked = !checked)}
         type="button"
