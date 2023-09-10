@@ -39,8 +39,8 @@
         id={label}
         for={name}
         class="mt-2 flex h-[200px] cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25
-        focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:bg-gray-200/25
-        {errors.length > 0 ? 'ring-2 ring-red-600 ring-offset-2' : ''}"
+        focus-within:border-0 focus-within:ring-2 focus-within:ring-indigo-600 hover:bg-gray-200/25
+        {errors.length > 0 ? 'border-0 ring-2 ring-red-600' : ''}"
     >
         <input
             bind:files

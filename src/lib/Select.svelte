@@ -1,6 +1,7 @@
 <script>
     import { cubicIn } from "svelte/easing";
     import { fade } from "svelte/transition";
+    import { checkElement } from "$lib/helpers";
 
     /** @type {string} */
     export let name;
@@ -23,18 +24,18 @@
      * @param {HTMLElement} node
      * @returns {{ destroy(): void }}
      */
-    function trapfocus(node) {
-        const previous = document.activeElement;
+    function focus(node) {
+        const activeElement = document.activeElement;
+        const previous = checkElement(activeElement);
         if (!previous || !(previous instanceof HTMLElement)) {
             return { destroy() {} };
         }
 
         /**
          * @param {KeyboardEvent} event
-         * @param {HTMLElement} previous
          * @returns {void}
          */
-        function handleKeydown(event, previous) {
+        function handleKeydown(event) {
             if (event.key === "ArrowDown") {
                 event.preventDefault();
                 active = (active + 1) % options.length;
@@ -45,13 +46,13 @@
             }
             if (event.key === "Escape") {
                 open = false;
-                previous.focus({ preventScroll: true });
+                previous?.focus({ preventScroll: true });
             }
             if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
                 value = options[active] ?? "";
                 open = false;
-                previous.focus({ preventScroll: true });
+                previous?.focus({ preventScroll: true });
             }
         }
 
@@ -69,16 +70,12 @@
         }
 
         document.addEventListener("click", handleClickOutside);
-        node.addEventListener("keydown", (event) =>
-            handleKeydown(event, previous),
-        );
+        node.addEventListener("keydown", handleKeydown);
         node.focus({ preventScroll: true });
 
         return {
             destroy() {
-                node.removeEventListener("keydown", (event) =>
-                    handleKeydown(event, previous),
-                );
+                node.removeEventListener("keydown", handleKeydown);
                 document.removeEventListener("click", handleClickOutside);
             },
         };
@@ -136,7 +133,7 @@
             <!--{open ? 'opacity-100' : 'opacity-0 transition duration-100 ease-in'}-->
             <ul
                 out:fade={{ duration: 100, easing: cubicIn }}
-                use:trapfocus
+                use:focus
                 class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 tabindex="-1"
                 role="listbox"
@@ -145,6 +142,7 @@
             >
                 {#each options as option, i}
                     <!-- This one is dealt with by the trapfocus function -->
+                    <!-- TODO - check if this can be fixed -->
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <li
                         class="group relative cursor-default select-none py-2 pl-3 pr-9

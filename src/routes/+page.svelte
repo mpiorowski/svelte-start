@@ -9,6 +9,7 @@
     import Dropzone from "$lib/Dropzone.svelte";
     import FileInput from "$lib/FileInput.svelte";
     import { toast } from "$lib/toast";
+    import Modal from "$lib/Modal.svelte";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -123,6 +124,7 @@
         });
         if (!valid.success) {
             const errors = valid.error.flatten().fieldErrors;
+            console.error(errors);
             fieldErrors = errors;
             const fieldsString = Object.keys(errors)
                 .map((field) => `"${field}"`)
@@ -132,16 +134,25 @@
                 `Please check the following fields: ${fieldsString}`,
             );
         } else {
-            console.log(valid.data.resume);
-            console.log(valid.data.coverPhoto);
-            console.log(valid.data);
+            console.info(valid.data);
             toast.success("Saved", "Your profile has been updated.");
         }
     }
 
     /** @type {Partial<Record<keyof User, string[]>>} */
     let fieldErrors = {};
+
+    /** @type {boolean} */
+    let openModal = false;
 </script>
+
+{#if openModal}
+    <Modal
+        bind:open={openModal}
+        title="Deactivate your account"
+        description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
+    />
+{/if}
 
 <form on:submit|preventDefault={handleSubmit} class="m-auto max-w-2xl p-10">
     <div class="space-y-12">
@@ -380,7 +391,13 @@
     </div>
 
     <div class="mt-6 flex items-center justify-end gap-x-6">
-        <Button type="button" variant="link">Cancel</Button>
+        <Button
+            type="button"
+            variant="link"
+            on:click={() => (openModal = true)}
+        >
+            Deactivate
+        </Button>
         <Button>Save</Button>
     </div>
 </form>
