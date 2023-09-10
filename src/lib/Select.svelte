@@ -86,7 +86,6 @@
 </script>
 
 <div>
-    <input type="hidden" name="{name}" value="{value}" />
     <label
         id="{name}-label"
         class="block text-sm font-medium leading-6 text-gray-900"
@@ -104,6 +103,7 @@
             aria-expanded={open}
             on:click|stopPropagation={() => (open = !open)}
         >
+            <input type="hidden" {name} {value} />
             <span class="block truncate">{value}</span>
             <span
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"

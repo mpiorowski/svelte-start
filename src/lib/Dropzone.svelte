@@ -10,9 +10,6 @@
     /** @type {string | undefined} */
     export let accept = "*/*";
 
-    /** @type {HTMLInputElement} */
-    let fileInput;
-
     /** @type {FileList} */
     let files;
     $: if (files && files[0]) {
@@ -30,20 +27,17 @@
     }
 </script>
 
-<div class="m-1">
-    <label
-        for={label}
-        class="block text-sm font-medium leading-6 text-gray-900"
-    >
+<div>
+    <label for={name} class="block text-sm font-medium leading-6 text-gray-900">
         {label}
     </label>
     <label
         id={label}
         for={name}
-        class="relative mt-2 flex h-[200px] cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 transition hover:bg-gray-200/25 focus:border-gray-900/25 focus:outline-none focus:ring-gray-900/25"
+        class="mt-2 flex h-[200px] cursor-pointer justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10
+        hover:bg-gray-200/25 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2"
     >
         <input
-            bind:this={fileInput}
             bind:files
             id={name}
             {name}
@@ -57,32 +51,6 @@
                 src={url}
                 alt=""
             />
-            <button
-                type="button"
-                class="absolute right-0 top-0 p-1 text-gray-900/50 hover:text-gray-900/75 focus:outline-none focus:ring-2 focus:ring-gray-900/25 focus:ring-offset-2"
-                on:click={(e) => {
-                    e.preventDefault();
-                    file = undefined;
-                    fileInput.value = "";
-                }}
-            >
-                <span class="sr-only">Remove image</span>
-                <svg
-                    class="h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    />
-                </svg>
-            </button>
         {:else}
             <div class="text-center">
                 <svg
