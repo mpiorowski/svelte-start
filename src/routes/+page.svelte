@@ -10,6 +10,7 @@
     import FileInput from "$lib/form/FileInput.svelte";
     import { toast } from "$lib/overlay/toast";
     import Modal from "$lib/overlay/Modal.svelte";
+    import Drawer from "$lib/overlay/Drawer.svelte";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -144,6 +145,9 @@
 
     /** @type {boolean} */
     let openModal = false;
+
+    /** @type {boolean} */
+    let openDrawer = false;
 </script>
 
 {#if openModal}
@@ -154,6 +158,19 @@
     >
         <Button type="button" variant="error">Deactivate</Button>
     </Modal>
+{/if}
+{#if openDrawer}
+    <Drawer title="Info" bind:open={openDrawer}>
+        {#each Array(20) as _}
+            <p class="mb-10 text-sm text-gray-500">
+                {_} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+                cupiditate laboriosam fugiat.
+            </p>
+        {/each}
+        <svelte:fragment slot="submit">
+            <Button>Save</Button>
+        </svelte:fragment>
+    </Drawer>
 {/if}
 
 <form on:submit|preventDefault={handleSubmit} class="m-auto max-w-2xl p-10">
@@ -402,7 +419,13 @@
         >
             Deactivate
         </Button>
-        <Button type="button" variant="secondary">Info</Button>
+        <Button
+            type="button"
+            variant="secondary"
+            on:click={() => (openDrawer = true)}
+        >
+            Info
+        </Button>
         <Button>Save</Button>
     </div>
 </form>

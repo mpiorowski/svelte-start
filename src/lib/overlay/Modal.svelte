@@ -160,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <div class="mt-5 gap-4 sm:mt-4 sm:flex sm:flex-row-reverse">
                     <slot />
                     <Button
                         on:click={() => (open = false)}

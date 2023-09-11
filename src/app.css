@@ -6,3 +6,7 @@
     box-sizing: border-box;
     outline: none;
 }
+
+.no-scroll {
+    overflow: hidden;
+}
