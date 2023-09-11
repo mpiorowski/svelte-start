@@ -9,7 +9,7 @@
     export let type = "text";
     /** @type {string} */
     export let placeholder = "";
-    /** @type {import("./types").autocomplete} */
+    /** @type {import("../types").autocomplete} */
     export let autocomplete = "off";
     /** @type {number} */
     export let rows = 0;

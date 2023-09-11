@@ -1,5 +1,5 @@
 <script>
-    import { toastStore } from "$lib/toast";
+    import { toastStore } from "$lib/overlay/toast";
     import { cubicOut } from "svelte/easing";
     import { fade, fly } from "svelte/transition";
 

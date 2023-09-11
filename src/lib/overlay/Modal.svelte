@@ -2,7 +2,7 @@
     import { cubicIn, cubicOut } from "svelte/easing";
     import { fade, scale } from "svelte/transition";
     import { checkElement } from "$lib/helpers";
-    import Button from "./Button.svelte";
+    import Button from "$lib/form/Button.svelte";
 
     /** @type {boolean} */
     export let open = false;
@@ -11,24 +11,29 @@
     /** @type {string} */
     export let description;
 
+    /** @type {HTMLElement | undefined} */
+    let previous = undefined;
+
+    $: if (!open) {
+        previous?.focus({ preventScroll: true });
+    }
+
     /**
      * @param {HTMLElement} node
      * @returns {{ destroy(): void }}
      */
     function focus(node) {
-        const active = document.activeElement;
-        const previous = checkElement(active);
+        previous = checkElement(document.activeElement);
 
         // trap focus
         const focusableElements = node.querySelectorAll(
             'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
         );
-        const firstFocusable = focusableElements[0];
-        const firstFocusableElement = checkElement(firstFocusable);
-        const lastFocusable = focusableElements[focusableElements.length - 1];
-        const lastFocusableElement = checkElement(lastFocusable);
+        const firstFocusableElement = checkElement(focusableElements[0]);
+        const lastFocusableElement = checkElement(
+            focusableElements[focusableElements.length - 1],
+        );
         firstFocusableElement?.focus({ preventScroll: true });
-        console.log(firstFocusableElement);
 
         /**
          * @param {KeyboardEvent} event
@@ -37,7 +42,6 @@
         function handleKeydown(event) {
             if (event.key === "Escape") {
                 open = false;
-                previous?.focus({ preventScroll: true });
             }
             if (event.key === "Tab") {
                 if (event.shiftKey) {
@@ -156,9 +160,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse gap-2">
-                    <Button type="button" variant="error">Deactivate</Button>
-                    <Button on:click={() => (open = false)} type="button" variant="secondary">
+                <div class="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
+                    <slot />
+                    <Button
+                        on:click={() => (open = false)}
+                        type="button"
+                        variant="secondary"
+                    >
                         Cancel
                     </Button>
                 </div>

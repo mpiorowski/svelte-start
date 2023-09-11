@@ -1,6 +1,6 @@
 <script>
-    import Toast from "$lib/Toast.svelte";
-    import { toastStore } from "$lib/toast";
+    import Toast from "$lib/overlay/Toast.svelte";
+    import { toastStore } from "$lib/overlay/toast";
     import "../app.css";
 </script>
 

@@ -1,15 +1,15 @@
 <script>
-    import Button from "$lib/Button.svelte";
-    import Input from "$lib/Input.svelte";
-    import Checkbox from "$lib/Checkbox.svelte";
-    import Radio from "$lib/Radio.svelte";
-    import Select from "$lib/Select.svelte";
+    import Button from "$lib/form/Button.svelte";
+    import Input from "$lib/form/Input.svelte";
+    import Checkbox from "$lib/form/Checkbox.svelte";
+    import Radio from "$lib/form/Radio.svelte";
+    import Select from "$lib/form/Select.svelte";
     import { z } from "zod";
-    import Switch from "$lib/Switch.svelte";
-    import Dropzone from "$lib/Dropzone.svelte";
-    import FileInput from "$lib/FileInput.svelte";
-    import { toast } from "$lib/toast";
-    import Modal from "$lib/Modal.svelte";
+    import Switch from "$lib/form/Switch.svelte";
+    import Dropzone from "$lib/form/Dropzone.svelte";
+    import FileInput from "$lib/form/FileInput.svelte";
+    import { toast } from "$lib/overlay/toast";
+    import Modal from "$lib/overlay/Modal.svelte";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -151,7 +151,9 @@
         bind:open={openModal}
         title="Deactivate your account"
         description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
-    />
+    >
+        <Button type="button" variant="error">Deactivate</Button>
+    </Modal>
 {/if}
 
 <form on:submit|preventDefault={handleSubmit} class="m-auto max-w-2xl p-10">
@@ -372,7 +374,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="border-b border-gray-900/10 pb-12">
+        <div class="pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
                 Hire Me
             </h2>
@@ -390,7 +392,9 @@
         </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-end gap-x-6">
+    <div
+        class="sticky bottom-0 flex items-center justify-end gap-x-6 border-t border-gray-900/10 bg-white p-4"
+    >
         <Button
             type="button"
             variant="link"
@@ -398,6 +402,7 @@
         >
             Deactivate
         </Button>
+        <Button type="button" variant="secondary">Info</Button>
         <Button>Save</Button>
     </div>
 </form>

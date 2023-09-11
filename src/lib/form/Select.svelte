@@ -25,8 +25,7 @@
      * @returns {{ destroy(): void }}
      */
     function focus(node) {
-        const activeElement = document.activeElement;
-        const previous = checkElement(activeElement);
+        const previous = checkElement(document.activeElement);
         if (!previous || !(previous instanceof HTMLElement)) {
             return { destroy() {} };
         }
