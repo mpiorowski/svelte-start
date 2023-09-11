@@ -124,8 +124,8 @@
         -->
                 <div
                     use:focus
-                    in:fly={{ x: "100%", duration: 500, opacity: 100 }}
-                    out:fly={{ x: "100%", duration: 500, opacity: 100 }}
+                    in:fly={{ x: "100%", duration: 400, opacity: 100 }}
+                    out:fly={{ x: "100%", duration: 400, opacity: 100 }}
                     class="pointer-events-auto w-screen max-w-xl"
                 >
                     <div
@@ -174,17 +174,17 @@
                                 <slot />
                             </div>
                         </div>
-                        <div
-                            class="flex flex-shrink-0 justify-end gap-4 px-4 py-4"
-                        >
-                            <Button
-                                on:click={() => (open = false)}
-                                type="button"
-                                variant="secondary"
-                            >
-                                Cancel
-                            </Button>
-                            <slot name="submit" />
+                        <div class="flex justify-end px-4 py-4">
+                            <div class="inline-flex gap-4">
+                                <Button
+                                    on:click={() => (open = false)}
+                                    type="button"
+                                    variant="secondary"
+                                >
+                                    Cancel
+                                </Button>
+                                <slot name="submit" />
+                            </div>
                         </div>
                     </div>
                 </div>

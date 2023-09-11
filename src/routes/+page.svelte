@@ -410,22 +410,24 @@
     </div>
 
     <div
-        class="sticky bottom-0 flex items-center justify-end gap-x-6 border-t border-gray-900/10 bg-white p-4"
+        class="sticky bottom-0 flex justify-end border-t border-gray-900/10 bg-white p-4"
     >
-        <Button
-            type="button"
-            variant="link"
-            on:click={() => (openModal = true)}
-        >
-            Deactivate
-        </Button>
-        <Button
-            type="button"
-            variant="secondary"
-            on:click={() => (openDrawer = true)}
-        >
-            Info
-        </Button>
-        <Button>Save</Button>
+        <div class="inline-flex items-center gap-x-4">
+            <Button
+                type="button"
+                variant="link"
+                on:click={() => (openModal = true)}
+            >
+                Deactivate
+            </Button>
+            <Button
+                type="button"
+                variant="secondary"
+                on:click={() => (openDrawer = true)}
+            >
+                Info
+            </Button>
+            <Button>Save</Button>
+        </div>
     </div>
 </form>

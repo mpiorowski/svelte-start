@@ -160,8 +160,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5 gap-4 sm:mt-4 sm:flex sm:flex-row-reverse">
-                    <slot />
+                <div
+                    class="mt-5 flex flex-col gap-2 sm:float-right sm:mt-4 sm:inline-flex sm:flex-row-reverse"
+                >
                     <Button
                         on:click={() => (open = false)}
                         type="button"
@@ -169,6 +170,7 @@
                     >
                         Cancel
                     </Button>
+                    <slot />
                 </div>
             </div>
         </div>
