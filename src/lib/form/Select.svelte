@@ -14,8 +14,10 @@
     /** @type {string} */
     export let helper = "\x80";
 
-    let active = 0;
+    /** @type {boolean} */
     let open = false;
+    /** @type {number} */
+    let active = 0;
     $: if (open) {
         active = options.indexOf(value);
     }
@@ -26,9 +28,6 @@
      */
     function focus(node) {
         const previous = checkElement(document.activeElement);
-        if (!previous || !(previous instanceof HTMLElement)) {
-            return { destroy() {} };
-        }
 
         /**
          * @param {KeyboardEvent} event
@@ -60,6 +59,8 @@
          * @returns {void}
          */
         function handleClickOutside(event) {
+            console.log(node);
+            console.log(event.target);
             if (!(event.target instanceof Node)) {
                 return;
             }
@@ -68,9 +69,9 @@
             }
         }
 
-        document.addEventListener("click", handleClickOutside);
         node.addEventListener("keydown", handleKeydown);
         node.focus({ preventScroll: true });
+        document.addEventListener("click", handleClickOutside);
 
         return {
             destroy() {
@@ -92,13 +93,13 @@
     <div class="relative mt-2">
         <input type="hidden" {name} {value} />
         <button
+            on:click|stopPropagation={() => (open = !open)}
             id={name}
             type="button"
             class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
             aria-haspopup="listbox"
             aria-describedby="{name}-description"
             aria-expanded={open}
-            on:click|stopPropagation={() => (open = !open)}
         >
             <span class="block truncate">{value}</span>
             <span
