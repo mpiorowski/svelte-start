@@ -13,6 +13,7 @@
     import Drawer from "$lib/overlay/Drawer.svelte";
     import Avatar from "$lib/overlay/Avatar.svelte";
     import Dropdown from "$lib/overlay/Dropdown.svelte";
+    import SelectMultiple from "$lib/form/SelectMultiple.svelte";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -24,6 +25,15 @@
         "same",
         "none",
     ]);
+    const skills = /** @type {const} */ ([
+        "Frontend Development",
+        "Backend Development",
+        "UI/UX Design",
+        "DevOps",
+        "Database Administration",
+        "Mobile Development",
+    ]);
+
     const shema = z.object({
         username: z.string().min(3, "Username is required").max(50),
         about: z.string().min(3, "About is required").max(1000),
@@ -69,7 +79,8 @@
         candidates: z.boolean(),
         offers: z.boolean(),
         pushNotifications: z.enum(pushNotifications),
-        availableNow: z.boolean(),
+        skills: z.string().min(1, "Skills are required"),
+        available: z.boolean(),
         b2b: z.boolean(),
     });
 
@@ -94,9 +105,19 @@
         candidates: true,
         offers: true,
         pushNotifications: pushNotifications[1],
-        availableNow: true,
+        skills: skills[0] + " | " + skills[1],
+        available: true,
         b2b: false,
     };
+
+    /** @type {Partial<Record<keyof User, string[]>>} */
+    let fieldErrors = {};
+
+    /** @type {boolean} */
+    let openModal = false;
+
+    /** @type {boolean} */
+    let openDrawer = false;
 
     /**
      * @param {SubmitEvent & {currentTarget: HTMLFormElement}} event
@@ -122,7 +143,8 @@
             candidates: form.get("candidates") === "on",
             offers: form.get("offers") === "on",
             pushNotifications: form.get("push-notifications"),
-            availableNow: form.get("available-now") === "on",
+            skills: form.get("skills"),
+            available: form.get("available") === "on",
             b2b: form.get("b2b") === "on",
         });
         if (!valid.success) {
@@ -141,15 +163,6 @@
             toast.success("Saved", "Your profile has been updated.");
         }
     }
-
-    /** @type {Partial<Record<keyof User, string[]>>} */
-    let fieldErrors = {};
-
-    /** @type {boolean} */
-    let openModal = false;
-
-    /** @type {boolean} */
-    let openDrawer = false;
 </script>
 
 {#if openModal}
@@ -405,18 +418,31 @@
         </div>
         <div class="pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-                Hire Me
+                Profesional Information
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
-                If you want to hire me, please fill out the following form.
+                Share your profesional details so others can find you.
             </p>
+            <div class="mt-6">
+                <SelectMultiple
+                    name="skills"
+                    label="Skills"
+                    bind:value={user.skills}
+                    options={skills}
+                    errors={fieldErrors.skills ?? []}
+                />
+            </div>
             <div class="mt-6 space-y-6">
                 <Switch
-                    name="available-now"
+                    name="available"
                     label="Available now"
-                    bind:checked={user.availableNow}
+                    bind:checked={user.available}
                 />
-                <Switch name="b2b" label="B2B" bind:checked={user.b2b} />
+                <Switch
+                    name="b2b"
+                    label="Open to B2B"
+                    bind:checked={user.b2b}
+                />
             </div>
         </div>
     </div>

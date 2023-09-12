@@ -15,6 +15,8 @@
     export let value;
     /** @type {readonly string[]} */
     export let options;
+    /** @type {string[]} */
+    export let errors = [];
     /** @type {string} */
     export let helper = "\x80";
 
@@ -23,9 +25,10 @@
     /** @type {number} */
     let active = 0;
 
-    $: if (open) {
-        active = options.indexOf(value);
-    }
+    /** @type {number[]} */
+    let selected = value
+        ? value.split(" | ").map((v) => options.indexOf(v))
+        : [];
 
     /**
      * @param {HTMLElement} node
@@ -54,9 +57,12 @@
             }
             if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
-                value = options[active] ?? "";
-                open = false;
-                previous?.focus({ preventScroll: true });
+                if (selected.includes(active)) {
+                    selected = selected.filter((v) => v !== active);
+                } else {
+                    selected = [...selected, active];
+                }
+                value = selected.map((i) => options[i]).join(" | ");
             }
             if (event.key === "Tab") {
                 event.preventDefault();
@@ -102,12 +108,13 @@
             on:click|stopPropagation={() => (open = !open)}
             id={name}
             type="button"
-            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6
+            {errors.length > 0 && 'ring-2 ring-red-600'}"
             aria-haspopup="listbox"
             aria-describedby="{name}-description"
             aria-expanded={open}
         >
-            <span class="block truncate">{value}</span>
+            <span class="block truncate">{value + "\x80"}</span>
             <span
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
             >
@@ -160,17 +167,23 @@
                         aria-selected={option === value}
                         on:mouseenter={() => (active = i)}
                         on:click={() => {
-                            value = option;
-                            open = false;
+                            if (selected.includes(i)) {
+                                selected = selected.filter((v) => v !== i);
+                            } else {
+                                selected = [...selected, i];
+                            }
+                            value = selected.map((i) => options[i]).join(" | ");
                         }}
                     >
                         <span
                             class="block truncate font-normal
-                        {option === value ? 'font-semibold' : 'font-normal'}"
+                        {selected.includes(i)
+                                ? 'font-semibold'
+                                : 'font-normal'}"
                         >
                             {option}
                         </span>
-                        {#if option === value}
+                        {#if selected.includes(i)}
                             <span
                                 class="absolute inset-y-0 right-0 flex items-center pr-4
                             {active === i ? 'text-white' : 'text-indigo-600'}"
@@ -194,7 +207,11 @@
             </ul>
         {/if}
     </div>
-    <p id="{name}-description" class="text-xs leading-6 text-gray-500">
-        {helper}
+    <p
+        id="{name}-description"
+        class="text-xs leading-6
+        {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
+    >
+        {errors.length > 0 ? errors.join(", ") : helper}
     </p>
 </div>

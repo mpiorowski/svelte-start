@@ -26,15 +26,13 @@
     function focus(node) {
         previous = checkElement(document.activeElement);
 
-        // trap focus
+        /** @type {NodeListOf<HTMLElement>} */
         const focusableElements = node.querySelectorAll(
             'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
         );
-        const firstFocusableElement = checkElement(focusableElements[0]);
-        const lastFocusableElement = checkElement(
-            focusableElements[focusableElements.length - 1],
-        );
-        firstFocusableElement?.focus({ preventScroll: true });
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+        first?.focus({ preventScroll: true });
 
         /**
          * @param {KeyboardEvent} event
@@ -46,14 +44,14 @@
             }
             if (event.key === "Tab") {
                 if (event.shiftKey) {
-                    if (document.activeElement === firstFocusableElement) {
+                    if (document.activeElement === first) {
                         event.preventDefault();
-                        lastFocusableElement?.focus({ preventScroll: true });
+                        last?.focus({ preventScroll: true });
                     }
                 } else {
-                    if (document.activeElement === lastFocusableElement) {
+                    if (document.activeElement === last) {
                         event.preventDefault();
-                        firstFocusableElement?.focus({ preventScroll: true });
+                        first?.focus({ preventScroll: true });
                     }
                 }
             }
