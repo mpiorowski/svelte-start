@@ -11,7 +11,7 @@
         : 'text-gray-500 hover:text-gray-700'}"
     aria-current={$page.url.pathname === "/" ? "page" : undefined}
 >
-    Dashboard
+    Form
 </a>
 <a
     href="table"
@@ -24,22 +24,12 @@
     Table
 </a>
 <a
-    href="settings"
+    href="tooltip"
     class="rounded-md px-3 py-2 text-sm font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
-                {$page.url.pathname === '/settings'
+                {$page.url.pathname === '/tooltip'
         ? 'bg-indigo-100 text-indigo-700'
         : 'text-gray-500 hover:text-gray-700'}"
-    aria-current={$page.url.pathname === "/settings" ? "page" : undefined}
+    aria-current={$page.url.pathname === "/tooltip" ? "page" : undefined}
 >
-    Settings
-</a>
-<a
-    href="billing"
-    class="rounded-md px-3 py-2 text-sm font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
-                {$page.url.pathname === '/billing'
-        ? 'bg-indigo-100 text-indigo-700'
-        : 'text-gray-500 hover:text-gray-700'}"
-    aria-current={$page.url.pathname === "/billing" ? "page" : undefined}
->
-    Billing
+    Tooltip
 </a>
