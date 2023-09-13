@@ -77,16 +77,16 @@
 </script>
 
 <div class="relative inline-block text-left">
-    <!-- class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" -->
     <button
         type="button"
         id="menu-button"
-        class="inline-flex focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
+        class="flex justify-center items-center focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
         {rounded ? 'rounded-full' : ''}"
         aria-expanded={open}
         aria-haspopup="true"
         on:click={() => (open = !open)}
     >
+        <!-- class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" -->
         <slot name="button" />
         <!--
             Options

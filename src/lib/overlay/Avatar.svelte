@@ -1,6 +1,6 @@
 <span class="relative inline-flex justify-center hover:cursor-pointer">
     <span
-        class="inline-flex h-12 w-12 overflow-hidden rounded-full bg-gray-100 hover:bg-gray-200 transition"
+        class="inline-flex h-8 w-8 overflow-hidden rounded-full bg-gray-100 hover:bg-gray-200 transition"
     >
         <svg
             class="h-full w-full text-gray-300"

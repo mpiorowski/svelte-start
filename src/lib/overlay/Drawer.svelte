@@ -1,12 +1,15 @@
 <script>
     import Button from "$lib/form/Button.svelte";
     import { checkElement } from "$lib/helpers";
+    import XIcon from "$lib/icons/XIcon.svelte";
     import { fade, fly } from "svelte/transition";
 
     /** @type {boolean} */
     export let open = false;
     /** @type {string} */
     export let title;
+    /** @type {"right" | "left"} */
+    export let position = "right";
 
     /** @type {HTMLElement | undefined} */
     let previous = undefined;
@@ -108,7 +111,8 @@
     <div class="fixed inset-0 overflow-hidden">
         <div class="absolute inset-0 overflow-hidden">
             <div
-                class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+                class="pointer-events-none fixed inset-y-0 flex max-w-full
+                {position === 'right' ? 'right-0 pl-10' : 'left-0 pr-10'}"
             >
                 <!--
           Slide-over panel, show/hide based on slide-over state.
@@ -122,8 +126,16 @@
         -->
                 <div
                     use:focus
-                    in:fly={{ x: "100%", duration: 400, opacity: 100 }}
-                    out:fly={{ x: "100%", duration: 400, opacity: 100 }}
+                    in:fly={{
+                        x: position === "right" ? "100%" : "-100%",
+                        duration: 400,
+                        opacity: 100,
+                    }}
+                    out:fly={{
+                        x: position === "right" ? "100%" : "-100%",
+                        duration: 400,
+                        opacity: 100,
+                    }}
                     class="pointer-events-auto w-screen max-w-xl"
                 >
                     <div
@@ -150,20 +162,7 @@
                                             <span class="sr-only">
                                                 Close panel
                                             </span>
-                                            <svg
-                                                class="h-6 w-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke-width="1.5"
-                                                stroke="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    d="M6 18L18 6M6 6l12 12"
-                                                />
-                                            </svg>
+                                            <XIcon />
                                         </button>
                                     </div>
                                 </div>
