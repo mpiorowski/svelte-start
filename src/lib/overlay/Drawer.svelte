@@ -156,7 +156,7 @@
                                         <button
                                             on:click={() => (open = false)}
                                             type="button"
-                                            class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                            class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus-visible:ring-2 focus-visible:ring-indigo-500"
                                         >
                                             <span class="absolute -inset-2.5" />
                                             <span class="sr-only">

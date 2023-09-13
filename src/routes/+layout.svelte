@@ -32,7 +32,6 @@
 
         <div class="hidden sm:block">
             <nav class="flex gap-x-4" aria-label="Tabs">
-                <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
                 <Nav />
                 <div class="ml-auto flex items-center justify-center">
                     <Dropdown rounded>
