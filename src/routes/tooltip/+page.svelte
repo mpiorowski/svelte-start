@@ -1,59 +1,16 @@
 <script>
-    import {
-        arrow,
-        autoUpdate,
-        computePosition,
-        flip,
-        offset,
-        shift,
-    } from "@floating-ui/dom";
     import { onMount } from "svelte";
-
-    /** @type {HTMLButtonElement} */
+    import { tooltip } from "$lib/overlay/tooltip";
+    /** @type {HTMLElement} */
     let referenceEl;
-    /** @type {HTMLDivElement} */
+    /** @type {HTMLElement} */
     let floatingEl;
-    /** @type {HTMLDivElement} */
+    /** @type {HTMLElement} */
     let arrowEl;
 
     onMount(() => {
-        function update() {
-            computePosition(referenceEl, floatingEl, {
-                placement: "top",
-                middleware: [
-                    offset(5),
-                    flip(),
-                    shift({ padding: 10 }),
-                    arrow({ element: arrowEl }),
-                ],
-            }).then(({ x, y, placement, middlewareData }) => {
-                Object.assign(floatingEl.style, {
-                    left: `${x}px`,
-                    top: `${y}px`,
-                });
-
-                // Arrow
-                const { x: arrowX, y: arrowY } = middlewareData.arrow;
-                const staticSide = {
-                    top: "bottom",
-                    right: "left",
-                    bottom: "top",
-                    left: "right",
-                }[placement.split("-")[0]];
-
-                Object.assign(arrowEl.style, {
-                    left: arrowX != null ? `${arrowX}px` : "",
-                    top: arrowY != null ? `${arrowY}px` : "",
-                    right: "",
-                    bottom: "",
-                    [staticSide]: "-4px",
-                });
-            });
-        }
-        const cleanup = autoUpdate(referenceEl, floatingEl, update);
-        return () => {
-            cleanup();
-        };
+        const cleanup = tooltip(referenceEl, floatingEl, arrowEl);
+        return () => cleanup();
     });
 </script>
 
@@ -62,33 +19,22 @@
 >
     <button
         bind:this={referenceEl}
-        class="inline-block whitespace-nowrap rounded border p-2"
-        aria-describedby="tooltip"
+        class="group rounded-md border px-3 py-2 text-sm font-medium focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
     >
         My button
-    </button>
-    <div bind:this={floatingEl} id="tooltip" role="tooltip">
-        My tooltip
         <div
-            bind:this={arrowEl}
-            class="absolute h-2 w-2 rotate-45 bg-gray-900"
-        />
-    </div>
+            bind:this={floatingEl}
+            id="tooltip"
+            role="tooltip"
+            class="absolute w-fit rounded bg-gray-800 p-2 text-white opacity-0 transition-opacity delay-200 group-hover:opacity-100 group-focus:opacity-100"
+        >
+            My tooltip
+            <div
+                bind:this={arrowEl}
+                class="absolute h-2 w-2 rotate-45 bg-gray-800"
+            />
+        </div>
+    </button>
     <div class="inline-block h-[1000px]" />
     <div class="absolute mt-40 inline-block w-[1000px] border border-white" />
 </div>
-
-<style>
-    #tooltip {
-        width: max-content;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #222;
-        color: white;
-        font-weight: bold;
-        padding: 5px;
-        border-radius: 4px;
-        font-size: 90%;
-    }
-</style>

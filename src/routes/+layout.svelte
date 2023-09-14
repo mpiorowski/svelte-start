@@ -7,16 +7,23 @@
     import Drawer from "$lib/overlay/Drawer.svelte";
     import Dropdown from "$lib/overlay/Dropdown.svelte";
     import Avatar from "$lib/overlay/Avatar.svelte";
-    import Nav from "./nav.svelte";
+    import Nav from "./Nav.svelte";
 
     let open = false;
+    let navs = [
+        { href: "/", label: "Home" },
+        { href: "/table", label: "Table" },
+        { href: "/tooltip", label: "Tooltip" },
+    ];
 </script>
 
 <header class="bg-white shadow">
     {#if open}
         <Drawer position="left" title="Svelte Start" bind:open>
             <nav class="flex flex-col space-y-4">
-                <Nav />
+                {#each navs as nav}
+                    <Nav label={nav.label} href={nav.href} />
+                {/each}
             </nav>
         </Drawer>
     {/if}
@@ -32,7 +39,9 @@
 
         <div class="hidden sm:block">
             <nav class="flex gap-x-4" aria-label="Tabs">
-                <Nav />
+                {#each navs as nav}
+                    <Nav label={nav.label} href={nav.href} />
+                {/each}
                 <div class="ml-auto flex items-center justify-center">
                     <Dropdown rounded>
                         <svelte:fragment slot="button">
