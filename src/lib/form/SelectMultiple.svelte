@@ -34,7 +34,7 @@
      * @param {HTMLElement} node
      * @returns {{ destroy(): void }}
      */
-    function focus(node) {
+    function portal(node) {
         const previous = checkElement(document.activeElement);
         node.focus({ preventScroll: true });
 
@@ -145,8 +145,8 @@
             -->
             <!--{open ? 'opacity-100' : 'opacity-0 transition duration-100 ease-in'}-->
             <ul
+                use:portal
                 out:fade={{ duration: 100, easing: cubicIn }}
-                use:focus
                 class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 tabindex="-1"
                 role="listbox"

@@ -26,7 +26,7 @@
      * @param {HTMLElement} node
      * @returns {{ destroy(): void }}
      */
-    function focus(node) {
+    function portal(node) {
         previous = checkElement(document.activeElement);
 
         /** @type {NodeListOf<HTMLElement>} */
@@ -125,7 +125,7 @@
             To: "translate-x-full"
         -->
                 <div
-                    use:focus
+                    use:portal
                     in:fly={{
                         x: position === "right" ? "100%" : "-100%",
                         duration: 400,

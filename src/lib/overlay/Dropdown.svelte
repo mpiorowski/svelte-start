@@ -13,7 +13,7 @@
      * @param {HTMLElement} node
      * @returns {{ destroy(): void }}
      */
-    function focus(node) {
+    function portal(node) {
         const previous = checkElement(document.activeElement);
 
         /** @type {NodeListOf<HTMLElement>} */
@@ -117,9 +117,9 @@
       To: "transform opacity-0 scale-95"
   -->
         <div
+            use:portal
             in:scale={{ duration: 100, start: 0.95, opacity: 0 }}
             out:scale={{ duration: 75, start: 0.95, opacity: 0 }}
-            use:focus
             class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             tabindex="-1"
             role="menu"
