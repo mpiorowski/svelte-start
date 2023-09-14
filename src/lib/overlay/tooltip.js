@@ -21,7 +21,7 @@ export function tooltip(referenceEl, floatingEl, arrowEl) {
         computePosition(referenceEl, floatingEl, {
             placement: "top",
             middleware: [
-                offset(5),
+                offset(8),
                 flip(),
                 shift({ padding: 10 }),
                 arrow({ element: arrowEl }),
