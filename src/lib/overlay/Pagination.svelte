@@ -13,7 +13,7 @@
      */
     export let pagination;
 
-    $: p = Number($page.url.searchParams.get("p")) ?? 1;
+    $: p = Number($page.url.searchParams.get("p")) || 1;
 </script>
 
 <div
