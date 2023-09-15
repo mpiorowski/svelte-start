@@ -68,7 +68,8 @@
         bind:this={floatingEl}
         id="tooltip"
         role="tooltip"
-        class="absolute w-fit rounded bg-gray-800 p-2 text-white opacity-0 transition-opacity delay-200 peer-hover:opacity-100 peer-focus:opacity-100"
+        class="invisible absolute w-fit rounded bg-gray-800 p-2 text-white opacity-0 transition-opacity delay-200
+        peer-hover:visible peer-hover:opacity-100 peer-focus:visible peer-focus:opacity-100"
     >
         {text}
         <div
