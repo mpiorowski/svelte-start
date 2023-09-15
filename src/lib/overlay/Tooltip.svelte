@@ -1,9 +1,18 @@
 <script>
     import { onMount } from "svelte";
-    import { tooltip } from "$lib/overlay/tooltip";
+    import {
+        arrow,
+        autoPlacement,
+        autoUpdate,
+        computePosition,
+        offset,
+        shift,
+    } from "@floating-ui/dom";
 
     /** @type {string} */
     export let text;
+    /** @type {boolean} */
+    export let auto = false;
     /** @type {HTMLElement} */
     let referenceEl;
     /** @type {HTMLElement} */
@@ -56,9 +65,59 @@
         };
     }
 
+    /**
+     * Update the position of the floating element
+     */
+    function update() {
+        computePosition(referenceEl, floatingEl, {
+            placement: "top",
+            middleware: [
+                offset(8),
+                autoPlacement(),
+                shift({ padding: 10 }),
+                arrow({ element: arrowEl }),
+            ],
+        }).then(({ x, y, placement, middlewareData }) => {
+            Object.assign(floatingEl.style, {
+                left: `${x}px`,
+                top: `${y}px`,
+            });
+
+            // Arrow
+            if (!middlewareData.arrow) {
+                return;
+            }
+            const arrowPlacement = placement.split("-")[0] ?? "top";
+            const { x: arrowX, y: arrowY } = middlewareData.arrow;
+            const staticSide =
+                {
+                    top: "bottom",
+                    right: "left",
+                    bottom: "top",
+                    left: "right",
+                }[arrowPlacement] ?? "bottom";
+
+            Object.assign(arrowEl.style, {
+                left: arrowX != null ? `${arrowX}px` : "",
+                top: arrowY != null ? `${arrowY}px` : "",
+                right: "",
+                bottom: "",
+                [staticSide]: "-4px",
+            });
+        });
+    }
+
     onMount(() => {
-        const cleanup = tooltip(referenceEl, floatingEl, arrowEl);
-        return () => cleanup();
+        // for one time update
+        if (!auto) {
+            update();
+            return () => {};
+        }
+        // for auto update
+        else {
+            const cleanup = autoUpdate(referenceEl, floatingEl, update);
+            return () => cleanup();
+        }
     });
 </script>
 
