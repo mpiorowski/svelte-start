@@ -88,6 +88,10 @@
     }
 </script>
 
+<!-- 
+    !IMPORTANT
+    All styling and aria must be also added to Select.svelte
+-->
 <div>
     <label
         id="{name}-label"

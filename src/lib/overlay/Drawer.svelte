@@ -23,6 +23,8 @@
     // }
 
     /**
+     * @see Every change here should must be added to Modal.svelte
+     * @link ./Modal.svelte
      * @param {HTMLElement} node
      * @returns {{ destroy(): void }}
      */
