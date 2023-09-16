@@ -92,6 +92,17 @@
                         {toast.description}
                     </p>
                 {/if}
+                {#if toast.action}
+                    <button
+                        class="mt-4 text-sm text-indigo-600 hover:text-indigo-500"
+                        aria-hidden="true"
+                        on:click={() => {
+                            toast.action?.onClick();
+                        }}
+                    >
+                        {toast.action?.label}
+                    </button>
+                {/if}
             </div>
             <div class="ml-4 flex flex-shrink-0">
                 <button

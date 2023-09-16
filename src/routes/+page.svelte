@@ -8,7 +8,7 @@
     import Switch from "$lib/form/Switch.svelte";
     import Dropzone from "$lib/form/Dropzone.svelte";
     import FileInput from "$lib/form/FileInput.svelte";
-    import { toast } from "$lib/overlay/toast";
+    import { showToast, toast } from "$lib/overlay/toast";
     import Modal from "$lib/overlay/Modal.svelte";
     import Drawer from "$lib/overlay/Drawer.svelte";
     import SelectMultiple from "$lib/form/SelectMultiple.svelte";
@@ -148,15 +148,30 @@
         });
         if (!valid.success) {
             const errors = valid.error.flatten().fieldErrors;
-            console.error(errors);
             fieldErrors = errors;
-            const fieldsString = Object.keys(errors)
-                .map((field) => `"${field}"`)
-                .join(", ");
-            toast.error(
-                "Validation failed",
-                `Please check the following fields: ${fieldsString}`,
-            );
+            console.error(errors);
+            // const fieldsString = Object.keys(errors)
+            //     .map((field) => `"${field}"`)
+            //     .join(", ");
+            const firstError = Object.keys(errors)[0];
+
+            showToast({
+                id: "validation-failed",
+                title: "Validation failed",
+                description: `Found ${Object.keys(errors).length} errors`,
+                type: "error",
+                duration: 6000,
+                action: {
+                    label: "Go to first error",
+                    onClick: () => {
+                        /** @type {HTMLInputElement | null} */
+                        const input = document.querySelector(
+                            `[name="${firstError}"]`,
+                        );
+                        input?.focus();
+                    },
+                },
+            });
         } else {
             console.info(valid.data);
             toast.success("Saved", "Your profile has been updated.");
