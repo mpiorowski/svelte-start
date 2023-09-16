@@ -166,6 +166,7 @@
 
 {#if openModal}
     <Modal
+        alert
         bind:open={openModal}
         title="Deactivate your account"
         description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."

@@ -8,6 +8,7 @@
         offset,
         shift,
     } from "@floating-ui/dom";
+    import { generateId } from "$lib/helpers";
 
     /** @type {string} */
     export let text;
@@ -119,18 +120,20 @@
             return () => cleanup();
         }
     });
+
+    const id = generateId();
 </script>
 
 <div
     use:portal
     bind:this={referenceEl}
-    aria-describedby="tooltip"
+    aria-describedby="tooltip-{id}"
     class="inline-flex"
 >
     <slot />
     <div
         bind:this={floatingEl}
-        id="tooltip"
+        id="tooltip-{id}"
         role="tooltip"
         class="invisible absolute w-fit rounded bg-gray-800 p-2 text-white opacity-0 transition-opacity delay-200
         peer-hover:visible peer-hover:opacity-100 peer-focus:visible peer-focus:opacity-100"

@@ -1,7 +1,7 @@
 <script>
     import { cubicIn, cubicOut } from "svelte/easing";
     import { fade, scale } from "svelte/transition";
-    import { checkElement } from "$lib/helpers";
+    import { checkElement, generateId } from "$lib/helpers";
     import Button from "$lib/form/Button.svelte";
 
     /** @type {boolean} */
@@ -10,6 +10,8 @@
     export let title;
     /** @type {string} */
     export let description;
+    /** @type {boolean} */
+    export let alert = false;
 
     /** @type {HTMLElement | undefined} */
     let previous = undefined;
@@ -83,12 +85,15 @@
             },
         };
     }
+
+    const id = generateId();
 </script>
 
 <div
     class="relative z-10"
-    aria-labelledby="modal-title"
-    role="dialog"
+    role={alert ? "alertdialog" : "dialog"}
+    aria-labelledby="modal-title-{id}"
+    aria-describedby="modal-description-{id}"
     aria-modal="true"
 >
     <!--
@@ -149,11 +154,11 @@
                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                         <h3
                             class="text-base font-semibold leading-6 text-gray-900"
-                            id="modal-title"
+                            id="modal-title-{id}"
                         >
                             {title}
                         </h3>
-                        <div class="mt-2">
+                        <div class="mt-2" id="modal-description-{id}">
                             <p class="text-sm text-gray-500">
                                 {description}
                             </p>

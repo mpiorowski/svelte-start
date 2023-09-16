@@ -1,6 +1,6 @@
 <script>
     import Button from "$lib/form/Button.svelte";
-    import { checkElement } from "$lib/helpers";
+    import { checkElement, generateId } from "$lib/helpers";
     import XIcon from "$lib/icons/XIcon.svelte";
     import { fade, fly } from "svelte/transition";
 
@@ -85,11 +85,13 @@
             },
         };
     }
+
+    const id = generateId();
 </script>
 
 <div
     class="relative z-10"
-    aria-labelledby="slide-over-title"
+    aria-labelledby="drawer-title-{id}"
     role="dialog"
     aria-modal="true"
 >
@@ -148,7 +150,7 @@
                                 <div class="flex items-start justify-between">
                                     <h2
                                         class="text-base font-semibold leading-6 text-gray-900"
-                                        id="slide-over-title"
+                                        id="drawer-title-{id}"
                                     >
                                         {title}
                                     </h2>
