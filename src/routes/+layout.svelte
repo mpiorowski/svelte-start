@@ -11,7 +11,7 @@
 
     let open = false;
     let navs = [
-        { href: "/", label: "Home" },
+        { href: "/", label: "Form" },
         { href: "/table", label: "Table" },
         { href: "/tooltip", label: "Tooltip" },
     ];

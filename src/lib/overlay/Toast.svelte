@@ -21,6 +21,7 @@
     class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
     in:fly={{ duration: 300, easing: cubicOut, x: 10 }}
     out:fade={{ duration: 100 }}
+    role="alert"
 >
     <div class="p-4">
         <div class="flex items-start">

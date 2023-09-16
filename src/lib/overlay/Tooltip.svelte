@@ -121,7 +121,12 @@
     });
 </script>
 
-<div bind:this={referenceEl} class="inline-flex" use:portal>
+<div
+    use:portal
+    bind:this={referenceEl}
+    aria-describedby="tooltip"
+    class="inline-flex"
+>
     <slot />
     <div
         bind:this={floatingEl}

@@ -2,18 +2,21 @@ import { z } from "zod";
 import { fail } from "@sveltejs/kit";
 import { faker } from "@faker-js/faker";
 import { pagination } from "$lib/overlay/pagination";
+import fs from "fs";
 
-const data = Array(122)
-    .fill(0)
-    .map(() => ({
-        name: faker.person.fullName(),
-        title: faker.person.jobTitle(),
-        email: faker.internet.email(),
-        role: ["Member", "Admin"][Math.floor(Math.random() * 2)],
-    }));
+// const data = Array(122)
+//     .fill(0)
+//     .map(() => ({
+//         name: faker.person.fullName(),
+//         title: faker.person.jobTitle(),
+//         email: faker.internet.email(),
+//         role: ["Member", "Admin"][Math.floor(Math.random() * 2)],
+//     }));
+//fs.writeFileSync('data.json', JSON.stringify(data, null, '\t'));
 
 /** @type {import('./$types').PageServerLoad} */
 export function load({ url }) {
+    let data = JSON.parse(fs.readFileSync("data.json", "utf-8"));
     let p = Number(url.searchParams.get("p")) || 1;
     return {
         pagination: pagination(data, p),
