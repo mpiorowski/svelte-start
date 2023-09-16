@@ -3,12 +3,12 @@
 
     /**
      * @type {{
-     * start: number,
-     * end: number,
-     * prev: number,
-     * next: number,
-     * total: number,
-     * schema: number[]
+     *  start: number,
+     *  end: number,
+     *  prev: number,
+     *  next: number,
+     *  total: number,
+     *  schema: number[]
      * }}
      */
     export let pagination;

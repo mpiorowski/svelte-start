@@ -424,7 +424,10 @@
                     errors={fieldErrors.skills ?? []}
                 />
             </div>
-            <div class="mt-6 space-y-6">
+            <fieldset class="mt-6 space-y-6">
+                <legend class="text-sm font-semibold leading-6 text-gray-900">
+                    Available for hire
+                </legend>
                 <Switch
                     name="available"
                     label="Available now"
@@ -435,7 +438,7 @@
                     label="Open to B2B"
                     bind:checked={user.b2b}
                 />
-            </div>
+            </fieldset>
         </div>
     </div>
 
