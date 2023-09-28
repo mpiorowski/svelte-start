@@ -13,6 +13,7 @@
     import Drawer from "$lib/overlay/Drawer.svelte";
     import SelectMultiple from "$lib/form/SelectMultiple.svelte";
     import Tooltip from "$lib/overlay/Tooltip.svelte";
+    import { generateId } from "$lib/helpers";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -157,7 +158,7 @@
             const firstError = Object.keys(errors)[0];
 
             showToast({
-                id: "validation-failed",
+                id: generateId(),
                 title: "Validation failed",
                 description: `Found ${Object.keys(errors).length} errors`,
                 type: "error",
