@@ -12,6 +12,7 @@
     import Modal from "$lib/overlay/Modal.svelte";
     import Drawer from "$lib/overlay/Drawer.svelte";
     import SelectMultiple from "$lib/form/SelectMultiple.svelte";
+    import Tooltip from "$lib/overlay/Tooltip.svelte";
 
     const countries = /** @type {const} */ ([
         "United States",
@@ -207,8 +208,28 @@
     <div class="space-y-12">
         <div class="border-b border-gray-900/10 pb-12">
             <div>
-                <h2 class="text-base font-semibold leading-7 text-gray-900">
+                <h2
+                    class="flex items-center gap-2 text-base font-semibold leading-7 text-gray-900"
+                >
                     Profile
+                    <Tooltip
+                        text="This information will be displayed publicly so be careful what you share."
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-info h-4"
+                        >
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="16" x2="12" y2="12" />
+                            <line x1="12" y1="8" x2="12.01" y2="8" />
+                        </svg>
+                    </Tooltip>
                 </h2>
                 <p class="mt-1 text-sm leading-6 text-gray-600">
                     This information will be displayed publicly so be careful
@@ -262,8 +283,29 @@
         </div>
 
         <div class="border-b border-gray-900/10 pb-6">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">
+            <h2
+                class="flex items-center gap-2 text-base font-semibold leading-7 text-gray-900"
+            >
                 Personal Information
+
+                <Tooltip
+                    text="Use a permanent address where you can receive mail."
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-info h-4"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                </Tooltip>
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
                 Use a permanent address where you can receive mail.
@@ -352,8 +394,28 @@
         </div>
 
         <div class="border-b border-gray-900/10 pb-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">
+            <h2
+                class="flex items-center gap-2 text-base font-semibold leading-7 text-gray-900"
+            >
                 Notifications
+                <Tooltip
+                    text="We'll always let you know about important changes, but you pick what else you want to hear about."
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-info h-4"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                </Tooltip>
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
                 We'll always let you know about important changes, but you pick
@@ -424,8 +486,28 @@
             </div>
         </div>
         <div class="pb-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">
+            <h2
+                class="flex items-center gap-2 text-base font-semibold leading-7 text-gray-900"
+            >
                 Profesional Information
+                <Tooltip
+                    text="Share your profesional details so others can find you."
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-info h-4"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                </Tooltip>
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
                 Share your profesional details so others can find you.

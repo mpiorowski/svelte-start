@@ -128,7 +128,7 @@
     use:portal
     bind:this={referenceEl}
     aria-describedby="tooltip-{id}"
-    class="inline-flex"
+    class="group inline-flex"
 >
     <slot />
     <div
@@ -136,7 +136,7 @@
         id="tooltip-{id}"
         role="tooltip"
         class="invisible absolute w-fit rounded bg-gray-800 p-2 text-white opacity-0 transition-opacity delay-200
-        peer-hover:visible peer-hover:opacity-100 peer-focus:visible peer-focus:opacity-100"
+        group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100"
     >
         {text}
         <div

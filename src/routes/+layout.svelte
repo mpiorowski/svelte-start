@@ -12,7 +12,6 @@
     let navs = [
         { href: "/", label: "Form" },
         { href: "/table", label: "Table" },
-        { href: "/tooltip", label: "Tooltip" },
     ];
 </script>
 
