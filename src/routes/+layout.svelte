@@ -5,9 +5,8 @@
     import Button from "$lib/form/Button.svelte";
     import MenuIcon from "$lib/icons/MenuIcon.svelte";
     import Drawer from "$lib/overlay/Drawer.svelte";
-    import Dropdown from "$lib/overlay/Dropdown.svelte";
-    import Avatar from "$lib/overlay/Avatar.svelte";
     import Nav from "./Nav.svelte";
+    import Avatar from "$lib/overlay/Avatar.svelte";
 
     let open = false;
     let navs = [
@@ -43,12 +42,7 @@
                     <Nav label={nav.label} href={nav.href} />
                 {/each}
                 <div class="ml-auto flex items-center justify-center">
-                    <Dropdown rounded>
-                        <svelte:fragment slot="button">
-                            <span class="sr-only">User Settings</span>
-                            <Avatar />
-                        </svelte:fragment>
-                    </Dropdown>
+                    <Avatar />
                 </div>
             </nav>
         </div>
