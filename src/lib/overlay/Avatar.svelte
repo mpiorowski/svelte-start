@@ -83,7 +83,6 @@
         aria-haspopup="true"
         on:click={() => (open = !open)}
     >
-        <!-- class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" -->
         <span class="sr-only">User Settings</span>
         <span class="relative inline-flex justify-center hover:cursor-pointer">
             <span
@@ -103,21 +102,6 @@
                 class="absolute right-0 top-0 block h-3 w-3 rounded-full bg-green-300 ring-2 ring-white"
             />
         </span>
-        <!--
-            Options
-            <svg
-                class="-mr-1 h-5 w-5 text-gray-400"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-            >
-                <path
-                    fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd"
-                />
-            </svg>
-        -->
     </button>
 
     {#if open}
@@ -141,49 +125,51 @@
             aria-orientation="vertical"
             aria-labelledby="menu-button"
         >
-            <div class="py-1" role="none">
-                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                <a
-                    on:mouseover={() => (active = 0)}
-                    on:focus={() => (active = 0)}
-                    href="/account"
-                    class="block px-4 py-2 text-sm text-gray-700
+            <div class="divide-y divide-gray-100">
+                <div class="py-1" role="none">
+                    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                    <a
+                        on:mouseover={() => (active = 0)}
+                        on:focus={() => (active = 0)}
+                        href="/account"
+                        class="block px-4 py-2 text-sm text-gray-700
                     {active === 0 ? 'bg-gray-100 text-gray-900' : ''}"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-0"
-                >
-                    Account settings
-                </a>
-                <a
-                    on:mouseover={() => (active = 1)}
-                    on:focus={() => (active = 1)}
-                    href="/support"
-                    class="block px-4 py-2 text-sm text-gray-700
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-0"
+                    >
+                        Account settings
+                    </a>
+                    <a
+                        on:mouseover={() => (active = 1)}
+                        on:focus={() => (active = 1)}
+                        href="/support"
+                        class="block px-4 py-2 text-sm text-gray-700
                     {active === 1 ? 'bg-gray-100 text-gray-900' : ''}"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-1"
-                >
-                    Support
-                </a>
-                <a
-                    on:mouseover={() => (active = 2)}
-                    on:focus={() => (active = 2)}
-                    href="/license"
-                    class="block px-4 py-2 text-sm text-gray-700
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-1"
+                    >
+                        Support
+                    </a>
+                    <a
+                        on:mouseover={() => (active = 2)}
+                        on:focus={() => (active = 2)}
+                        href="/license"
+                        class="block px-4 py-2 text-sm text-gray-700
                     {active === 2 ? 'bg-gray-100 text-gray-900' : ''}"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-2"
-                >
-                    License
-                </a>
-                <form method="POST" action="#" role="none">
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-2"
+                    >
+                        License
+                    </a>
+                </div>
+                <div class="py-1" role="none">
                     <button
+                        on:click={() => (window.location.href = "/auth")}
                         on:mouseover={() => (active = 3)}
                         on:focus={() => (active = 3)}
-                        type="submit"
                         class="block w-full px-4 py-2 text-left text-sm text-gray-700
                         {active === 3 ? 'bg-gray-100 text-gray-900' : ''}"
                         role="menuitem"
@@ -192,7 +178,7 @@
                     >
                         Sign out
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     {/if}
