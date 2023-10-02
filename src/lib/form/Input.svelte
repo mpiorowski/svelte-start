@@ -61,7 +61,7 @@
     </div>
     <p
         id="{name}-description"
-        class="text-xs leading-6
+        class="mb-2 text-xs leading-6
         {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
     >
         {errors.length > 0 ? errors.join(", ") : helper}

@@ -3,10 +3,13 @@
     export let type = "submit";
     /** @type {'primary' | 'secondary' | 'link' | 'error'} */
     export let variant = "primary";
+    /** @type {string | undefined} */
+    export let form = undefined;
 </script>
 
 <button
     on:click
+    {form}
     {type}
     class="group inline-flex w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
         {variant === 'primary' &&
