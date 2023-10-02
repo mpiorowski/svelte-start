@@ -181,29 +181,25 @@
     }
 </script>
 
-{#if openModal}
-    <Modal
-        alert
-        bind:open={openModal}
-        title="Deactivate your account"
-        description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
-    >
-        <Button type="button" variant="error">Deactivate</Button>
-    </Modal>
-{/if}
-{#if openDrawer}
-    <Drawer title="Info" bind:open={openDrawer}>
-        {#each Array(20) as _}
-            <p class="mb-10 text-sm text-gray-500">
-                {_} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                cupiditate laboriosam fugiat.
-            </p>
-        {/each}
-        <svelte:fragment slot="submit">
-            <Button>Save</Button>
-        </svelte:fragment>
-    </Drawer>
-{/if}
+<Modal
+    alert
+    bind:open={openModal}
+    title="Deactivate your account"
+    description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
+>
+    <Button type="button" variant="danger">Deactivate</Button>
+</Modal>
+<Drawer title="Info" bind:open={openDrawer}>
+    {#each Array(20) as _}
+        <p class="mb-10 text-sm text-gray-500">
+            {_} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate
+            laboriosam fugiat.
+        </p>
+    {/each}
+    <svelte:fragment slot="submit">
+        <Button>Save</Button>
+    </svelte:fragment>
+</Drawer>
 
 <form on:submit|preventDefault={handleSubmit} class="m-auto max-w-2xl p-10">
     <div class="space-y-12">

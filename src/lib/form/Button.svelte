@@ -1,7 +1,7 @@
 <script>
     /** @type {'button' | 'submit' | 'reset'} */
     export let type = "submit";
-    /** @type {'primary' | 'secondary' | 'link' | 'error'} */
+    /** @type {'primary' | 'secondary' | 'link' | 'danger'} */
     export let variant = "primary";
     /** @type {string | undefined} */
     export let form = undefined;
@@ -18,7 +18,7 @@
         'bg-white text-gray-900 shadow-sm ring-1 ring-gray-300 hover:bg-gray-50 focus-visible:outline-gray-300'}
         {variant === 'link' &&
         'text-indigo-600 hover:text-indigo-500 focus-visible:outline-indigo-600'}
-        {variant === 'error' &&
+        {variant === 'danger' &&
         'bg-red-600 text-white shadow-sm hover:bg-red-500 focus-visible:outline-red-600'}
         "
 >
