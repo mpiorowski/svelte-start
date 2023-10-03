@@ -91,14 +91,13 @@
     const id = generateId();
 </script>
 
-{#if open}
-    <div
-        class="relative z-10"
-        aria-labelledby="drawer-title-{id}"
-        role="dialog"
-        aria-modal="true"
-    >
-        <!--
+<div
+    class="relative z-10"
+    aria-labelledby="drawer-title-{id}"
+    role="dialog"
+    aria-modal="true"
+>
+    <!--
     Background backdrop, show/hide based on slide-over state.
 
     Entering: "ease-in-out duration-500"
@@ -108,18 +107,18 @@
       From: "opacity-100"
       To: "opacity-0"
   -->
-        <div
-            transition:fade
-            class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-        />
+    <div
+        transition:fade
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    />
 
-        <div class="fixed inset-0 overflow-hidden">
-            <div class="absolute inset-0 overflow-hidden">
-                <div
-                    class="pointer-events-none fixed inset-y-0 flex max-w-full
+    <div class="fixed inset-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div
+                class="pointer-events-none fixed inset-y-0 flex max-w-full
                 {position === 'right' ? 'right-0 pl-10' : 'left-0 pr-10'}"
-                >
-                    <!--
+            >
+                <!--
           Slide-over panel, show/hide based on slide-over state.
 
           Entering: "transform transition ease-in-out duration-500 sm:duration-700"
@@ -129,68 +128,63 @@
             From: "translate-x-0"
             To: "translate-x-full"
         -->
+                <div
+                    use:portal
+                    in:fly={{
+                        x: position === "right" ? "100%" : "-100%",
+                        duration: 400,
+                        opacity: 100,
+                    }}
+                    out:fly={{
+                        x: position === "right" ? "100%" : "-100%",
+                        duration: 400,
+                        opacity: 100,
+                    }}
+                    class="pointer-events-auto w-screen max-w-xl"
+                >
                     <div
-                        use:portal
-                        in:fly={{
-                            x: position === "right" ? "100%" : "-100%",
-                            duration: 400,
-                            opacity: 100,
-                        }}
-                        out:fly={{
-                            x: position === "right" ? "100%" : "-100%",
-                            duration: 400,
-                            opacity: 100,
-                        }}
-                        class="pointer-events-auto w-screen max-w-xl"
+                        class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
                     >
                         <div
-                            class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
+                            class="flex min-h-0 flex-1 flex-col overflow-y-scroll py-6"
                         >
-                            <div
-                                class="flex min-h-0 flex-1 flex-col overflow-y-scroll py-6"
-                            >
-                                <div class="px-4 sm:px-6">
-                                    <div
-                                        class="flex items-start justify-between"
+                            <div class="px-4 sm:px-6">
+                                <div class="flex items-start justify-between">
+                                    <h2
+                                        class="text-base font-semibold leading-6 text-gray-900"
+                                        id="drawer-title-{id}"
                                     >
-                                        <h2
-                                            class="text-base font-semibold leading-6 text-gray-900"
-                                            id="drawer-title-{id}"
+                                        {title}
+                                    </h2>
+                                    <div class="ml-3 flex h-7 items-center">
+                                        <button
+                                            on:click={() => (open = false)}
+                                            type="button"
+                                            class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus-visible:ring-2 focus-visible:ring-indigo-500"
                                         >
-                                            {title}
-                                        </h2>
-                                        <div class="ml-3 flex h-7 items-center">
-                                            <button
-                                                on:click={() => (open = false)}
-                                                type="button"
-                                                class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus-visible:ring-2 focus-visible:ring-indigo-500"
-                                            >
-                                                <span
-                                                    class="absolute -inset-2.5"
-                                                />
-                                                <span class="sr-only">
-                                                    Close panel
-                                                </span>
-                                                <XIcon />
-                                            </button>
-                                        </div>
+                                            <span class="absolute -inset-2.5" />
+                                            <span class="sr-only">
+                                                Close panel
+                                            </span>
+                                            <XIcon />
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                                    <slot />
-                                </div>
                             </div>
-                            <div class="flex justify-end px-4 py-4">
-                                <div class="inline-flex gap-4">
-                                    <Button
-                                        on:click={() => (open = false)}
-                                        type="button"
-                                        variant="secondary"
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <slot name="submit" />
-                                </div>
+                            <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                                <slot />
+                            </div>
+                        </div>
+                        <div class="flex justify-end px-4 py-4">
+                            <div class="inline-flex gap-4">
+                                <Button
+                                    on:click={() => (open = false)}
+                                    type="button"
+                                    variant="secondary"
+                                >
+                                    Cancel
+                                </Button>
+                                <slot name="submit" />
                             </div>
                         </div>
                     </div>
@@ -198,4 +192,4 @@
             </div>
         </div>
     </div>
-{/if}
+</div>
