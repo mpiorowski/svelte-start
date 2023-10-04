@@ -76,12 +76,12 @@
             }
         }
         document.addEventListener("keydown", handleKeydown);
-        document.addEventListener("click", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
 
         return {
             destroy() {
                 document.removeEventListener("keydown", handleKeydown);
-                document.removeEventListener("click", handleClickOutside);
+                document.removeEventListener("mousedown", handleClickOutside);
             },
         };
     }
