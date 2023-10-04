@@ -1,4 +1,5 @@
 <script>
+    import { browser } from "$app/environment";
     import Button from "$lib/form/Button.svelte";
     import { checkElement, generateId } from "$lib/helpers";
     import XIcon from "$lib/icons/XIcon.svelte";
@@ -17,10 +18,12 @@
     $: if (!open) {
         previous?.focus({ preventScroll: true });
     }
-    // TODO - check if used
-    // $: if (browser) {
-    //     document.body.classList.toggle("no-scroll", open);
-    // }
+
+    $: if (browser) {
+        document.body.classList.toggle("no-scroll", open);
+        const scroll = document.getElementById("scroll");
+        scroll?.classList.toggle("scroll", open);
+    }
 
     /**
      * @see Every change here should must be added to Modal.svelte
