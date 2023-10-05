@@ -14,7 +14,11 @@
     /** @type {string} */
     export let value;
     /** @type {readonly string[]} */
+    export let values;
+    /** @type {readonly string[]} */
     export let options;
+    /** @type {string[]} */
+    export let errors = [];
     /** @type {string} */
     export let helper = "\x80";
 
@@ -24,7 +28,7 @@
     let active = 0;
 
     $: if (open) {
-        active = options.indexOf(value);
+        active = values.indexOf(value);
     }
 
     /**
@@ -42,11 +46,11 @@
         function handleKeydown(event) {
             if (event.key === "ArrowDown") {
                 event.preventDefault();
-                active = (active + 1) % options.length;
+                active = (active + 1) % values.length;
             }
             if (event.key === "ArrowUp") {
                 event.preventDefault();
-                active = (active - 1 + options.length) % options.length;
+                active = (active - 1 + values.length) % values.length;
             }
             if (event.key === "Escape") {
                 open = false;
@@ -54,7 +58,7 @@
             }
             if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
-                value = options[active] ?? "";
+                value = values[active] ?? "";
                 open = false;
                 previous?.focus({ preventScroll: true });
             }
@@ -111,7 +115,9 @@
             aria-describedby="{name}-description"
             aria-expanded={open}
         >
-            <span class="block truncate">{value}</span>
+            <span class="block truncate">
+                {options[values.indexOf(value)] ?? "\x80"}
+            </span>
             <span
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
             >
@@ -150,7 +156,7 @@
                 aria-labelledby="{name}-label"
                 aria-activedescendant="{name}-option-{active}"
             >
-                {#each options as option, i}
+                {#each values as option, i}
                     <!-- This one is dealt with by the trapfocus function -->
                     <!-- TODO - check if this can be fixed -->
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -172,7 +178,7 @@
                             class="block truncate font-normal
                         {option === value ? 'font-semibold' : 'font-normal'}"
                         >
-                            {option}
+                            {options[i]}
                         </span>
                         {#if option === value}
                             <span
@@ -198,7 +204,11 @@
             </ul>
         {/if}
     </div>
-    <p id="{name}-description" class="text-xs leading-6 text-gray-500">
-        {helper}
+    <p
+        id="{name}-description"
+        class="text-xs leading-6
+        {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
+    >
+        {errors.length > 0 ? errors.join(", ") : helper}
     </p>
 </div>

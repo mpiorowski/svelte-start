@@ -348,6 +348,7 @@
                         name="country"
                         label="Country"
                         bind:value={user.country}
+                        values={countries}
                         options={countries}
                     />
                 </div>
