@@ -16,13 +16,15 @@
 </script>
 
 <header class="bg-white shadow">
-    <Drawer position="left" title="Svelte Start" bind:open>
-        <nav class="flex flex-col space-y-4">
-            {#each navs as nav}
-                <Nav label={nav.label} href={nav.href} />
-            {/each}
-        </nav>
-    </Drawer>
+    {#if open}
+        <Drawer position="left" title="Svelte Start" bind:open>
+            <nav class="flex flex-col space-y-4">
+                {#each navs as nav}
+                    <Nav label={nav.label} href={nav.href} />
+                {/each}
+            </nav>
+        </Drawer>
+    {/if}
     <div class="mx-auto max-w-5xl px-2 py-4 sm:px-4 lg:px-6">
         <div class="flex items-center gap-2 sm:hidden">
             <div class="inline-flex">
