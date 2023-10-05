@@ -25,7 +25,7 @@
                 </a>
             </div>
         </li>
-        {#each url as el}
+        {#each url as el, index}
             <li>
                 <div class="flex items-center">
                     <svg
@@ -41,7 +41,7 @@
                         />
                     </svg>
                     <a
-                        href="/{el}"
+                        href="/{url.slice(0, index + 1).join("/")}"
                         class="ml-4 text-sm font-medium text-gray-400 hover:text-gray-500"
                     >
                         {String(el).charAt(0).toUpperCase() +
