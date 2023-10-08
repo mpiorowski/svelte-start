@@ -15,4 +15,11 @@ module.exports = {
         es2017: true,
         node: true,
     },
+    rules: {
+        "no-unused-vars": "error",
+        "no-undef": "error",
+        "no-shadow": "error",
+        "no-var": "error",
+        "prefer-const": "error",
+    },
 };

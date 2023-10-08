@@ -62,19 +62,19 @@ function generatePaginationSchema(data, currentPage, pageSize = 10) {
  * }}
  */
 export function pagination(data, currentPage, pageSize = 10) {
-    let paginated = data.slice(
+    const paginated = data.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize,
     );
-    let total = data.length;
-    let start = (currentPage - 1) * pageSize + 1;
-    let end = currentPage * pageSize > total ? total : currentPage * pageSize;
-    let prev = currentPage > 1 ? currentPage - 1 : 1;
-    let next =
+    const total = data.length;
+    const start = (currentPage - 1) * pageSize + 1;
+    const end = currentPage * pageSize > total ? total : currentPage * pageSize;
+    const prev = currentPage > 1 ? currentPage - 1 : 1;
+    const next =
         currentPage < Math.ceil(total / pageSize)
             ? currentPage + 1
             : Math.ceil(total / pageSize);
-    let schema = generatePaginationSchema(data, currentPage);
+    const schema = generatePaginationSchema(data, currentPage);
 
     return {
         data: paginated,

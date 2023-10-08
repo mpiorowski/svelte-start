@@ -176,7 +176,7 @@
                             } else {
                                 selected = [...selected, i];
                             }
-                            value = selected.map((i) => options[i]).join(" | ");
+                            value = selected.map((e) => options[e]).join(" | ");
                         }}
                     >
                         <span
