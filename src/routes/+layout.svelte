@@ -9,7 +9,7 @@
     import Avatar from "$lib/overlay/Avatar.svelte";
 
     let open = false;
-    let navs = [
+    const navs = [
         { href: "/", label: "Form" },
         { href: "/table", label: "Table" },
     ];
