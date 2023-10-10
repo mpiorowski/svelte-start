@@ -89,7 +89,7 @@
      * @typedef {z.infer<typeof shema>} User
      * @type {User}
      */
-    let user = {
+    const user = {
         username: "",
         about: "",
         resume: new File([""], ""),

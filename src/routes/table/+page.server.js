@@ -15,7 +15,7 @@ import data from "../../../data.json";
 
 /** @type {import('./$types').PageServerLoad} */
 export function load({ url }) {
-    let p = Number(url.searchParams.get("p")) || 1;
+    const p = Number(url.searchParams.get("p")) || 1;
     return {
         pagination: pagination(data, p),
     };
