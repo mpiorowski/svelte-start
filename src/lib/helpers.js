@@ -19,3 +19,21 @@ export function checkElement(element) {
     }
     return element;
 }
+
+/**
+ * Extract errors from a fields object
+ * @param {Record<string, string[]> | undefined} fields
+ * @param {string} field
+ * @returns {string[]}
+ */
+export function extractErrors(fields, field) {
+    if (!fields) {
+        return [];
+    }
+    for (const [key, value] of Object.entries(fields)) {
+        if (key === field) {
+            return value;
+        }
+    }
+    return [];
+}
