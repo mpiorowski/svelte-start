@@ -15,8 +15,8 @@
     export let value;
     /** @type {readonly string[]} */
     export let options;
-    /** @type {string[]} */
-    export let errors = [];
+    /** @type {string} */
+    export let error = "";
     /** @type {string} */
     export let helper = "\x80";
 
@@ -113,7 +113,7 @@
             id={name}
             type="button"
             class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6
-            {errors.length > 0 && 'ring-2 ring-red-600'}"
+            {error && 'ring-2 ring-red-600'}"
             aria-haspopup="listbox"
             aria-describedby="{name}-description"
             aria-expanded={open}
@@ -214,8 +214,8 @@
     <p
         id="{name}-description"
         class="text-xs leading-6
-        {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
+        {error ? 'text-red-600' : 'text-gray-500'}"
     >
-        {errors.length > 0 ? errors.join(", ") : helper}
+        {error || helper}
     </p>
 </div>

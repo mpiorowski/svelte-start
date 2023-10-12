@@ -152,9 +152,6 @@
             const errors = valid.error.flatten().fieldErrors;
             fieldErrors = errors;
             console.error(errors);
-            // const fieldsString = Object.keys(errors)
-            //     .map((field) => `"${field}"`)
-            //     .join(", ");
             const firstError = Object.keys(errors)[0];
 
             showToast({
@@ -179,6 +176,7 @@
             toast.success("Saved", "Your profile has been updated.");
         }
     }
+
 </script>
 
 {#if openModal}
@@ -245,7 +243,7 @@
                         label="Username"
                         autocomplete="username"
                         bind:value={user.username}
-                        errors={fieldErrors.username ?? []}
+                        error={fieldErrors.username?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -256,7 +254,7 @@
                         bind:value={user.about}
                         rows={3}
                         helper="Write a few sentences about yourself."
-                        errors={fieldErrors.about ?? []}
+                        error={fieldErrors.about?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -266,7 +264,7 @@
                         name="resume"
                         bind:file={user.resume}
                         helper="PDF up to 5MB"
-                        errors={fieldErrors.resume ?? []}
+                        error={fieldErrors.resume?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -277,7 +275,7 @@
                         bind:file={user.coverPhoto}
                         description="SVG, PNG, JPG, GIF up to 10MB"
                         accept="image/*"
-                        errors={fieldErrors.coverPhoto ?? []}
+                        error={fieldErrors.coverPhoto?.join(" ") ?? ""}
                     />
                 </div>
             </div>
@@ -319,7 +317,7 @@
                         label="First name"
                         autocomplete="given-name"
                         bind:value={user.firstName}
-                        errors={fieldErrors.firstName ?? []}
+                        error={fieldErrors.firstName?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -329,7 +327,7 @@
                         label="Last name"
                         autocomplete="family-name"
                         bind:value={user.lastName}
-                        errors={fieldErrors.lastName ?? []}
+                        error={fieldErrors.lastName?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -339,7 +337,7 @@
                         label="Email address"
                         autocomplete="email"
                         bind:value={user.email}
-                        errors={fieldErrors.email ?? []}
+                        error={fieldErrors.email?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -359,7 +357,7 @@
                         label="Street address"
                         bind:value={user.streetAddress}
                         autocomplete="street-address"
-                        errors={fieldErrors.streetAddress ?? []}
+                        error={fieldErrors.streetAddress?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -369,7 +367,7 @@
                         label="City"
                         bind:value={user.city}
                         autocomplete="address-level2"
-                        errors={fieldErrors.city ?? []}
+                        error={fieldErrors.city?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -379,7 +377,7 @@
                         label="State / Province"
                         bind:value={user.region}
                         autocomplete="address-level1"
-                        errors={fieldErrors.region ?? []}
+                        error={fieldErrors.region?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -389,7 +387,7 @@
                         label="ZIP / Postal"
                         bind:value={user.postalCode}
                         autocomplete="postal-code"
-                        errors={fieldErrors.postalCode ?? []}
+                        error={fieldErrors.postalCode?.join(" ") ?? ""}
                     />
                 </div>
             </div>
@@ -520,7 +518,7 @@
                     label="Skills"
                     bind:value={user.skills}
                     options={skills}
-                    errors={fieldErrors.skills ?? []}
+                    error={fieldErrors.skills?.join(" ") ?? ""}
                 />
             </div>
             <fieldset class="mt-6 space-y-6">

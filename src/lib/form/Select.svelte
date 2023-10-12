@@ -17,8 +17,8 @@
     export let values;
     /** @type {readonly string[]} */
     export let options;
-    /** @type {string[]} */
-    export let errors = [];
+    /** @type {string} */
+    export let error = "";
     /** @type {string} */
     export let helper = "\x80";
 
@@ -207,8 +207,8 @@
     <p
         id="{name}-description"
         class="text-xs leading-6 mb-2
-        {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
+        {error ? 'text-red-600' : 'text-gray-500'}"
     >
-        {errors.length > 0 ? errors.join(", ") : helper}
+        {error || helper}
     </p>
 </div>

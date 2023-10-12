@@ -3,7 +3,7 @@
     export let name;
     /** @type {string} */
     export let label;
-    /** @type {string} */
+    /** @type {string | number} */
     export let value;
     /** @type {"text" | "email" | "password"} */
     export let type = "text";
@@ -13,8 +13,8 @@
     export let autocomplete = "off";
     /** @type {number} */
     export let rows = 0;
-    /** @type {string[]} */
-    export let errors = [];
+    /** @type {string} */
+    export let error = "";
     /** @type {string} */
     export let helper = "\x80";
 
@@ -41,8 +41,8 @@
                 {placeholder}
                 {autocomplete}
                 class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
-                {errors.length > 0 ? 'ring-2 ring-red-600' : ''}"
-                aria-invalid={errors.length > 0}
+                {error ? 'ring-2 ring-red-600' : ''}"
+                aria-invalid={!!error}
                 aria-describedby="{name}-description"
             />
         {:else}
@@ -53,8 +53,8 @@
                 {placeholder}
                 {rows}
                 class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
-                {errors.length > 0 ? 'ring-2 ring-red-600' : ''}"
-                aria-invalid={errors.length > 0}
+                {error ? 'ring-2 ring-red-600' : ''}"
+                aria-invalid={!!error}
                 aria-describedby="{name}-description"
             />
         {/if}
@@ -62,8 +62,8 @@
     <p
         id="{name}-description"
         class="mb-2 text-xs leading-6
-        {errors.length > 0 ? 'text-red-600' : 'text-gray-500'}"
+        {error ? 'text-red-600' : 'text-gray-500'}"
     >
-        {errors.length > 0 ? errors.join(", ") : helper}
+        {error || helper}
     </p>
 </div>
