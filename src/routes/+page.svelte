@@ -13,7 +13,7 @@
     import Drawer from "$lib/ui/Drawer.svelte";
     import SelectMultiple from "$lib/form/SelectMultiple.svelte";
     import Tooltip from "$lib/ui/Tooltip.svelte";
-    import { generateId } from "$lib/helpers";
+    import { generateId } from "$lib/utils";
 
     const countries = /** @type {const} */ ([
         "United States",

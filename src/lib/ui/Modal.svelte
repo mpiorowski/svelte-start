@@ -1,7 +1,7 @@
 <script>
     import { cubicIn, cubicOut } from "svelte/easing";
     import { fade, scale } from "svelte/transition";
-    import { checkElement, generateId } from "$lib/helpers";
+    import { checkElement, generateId } from "$lib/utils";
     import Button from "$lib/form/Button.svelte";
 
     /** @type {boolean} */

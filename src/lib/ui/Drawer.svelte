@@ -1,7 +1,7 @@
 <script>
     import { browser } from "$app/environment";
     import Button from "$lib/form/Button.svelte";
-    import { checkElement, generateId } from "$lib/helpers";
+    import { checkElement, generateId } from "$lib/utils";
     import XIcon from "$lib/icons/XIcon.svelte";
     import { fade, fly } from "svelte/transition";
 

@@ -8,7 +8,7 @@
         offset,
         shift,
     } from "@floating-ui/dom";
-    import { generateId } from "$lib/helpers";
+    import { generateId } from "$lib/utils";
 
     /** @type {string} */
     export let text;

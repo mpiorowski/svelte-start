@@ -5,7 +5,7 @@
 <script>
     import { cubicIn } from "svelte/easing";
     import { fade } from "svelte/transition";
-    import { checkElement } from "$lib/helpers";
+    import { checkElement } from "$lib/utils";
 
     /** @type {string} */
     export let name;
