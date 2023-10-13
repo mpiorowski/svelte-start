@@ -1,6 +1,6 @@
 <script>
-    import Dropdown from "$lib/overlay/Dropdown.svelte";
-    import Pagination from "$lib/overlay/Pagination.svelte";
+    import Dropdown from "$lib/ui/Dropdown.svelte";
+    import Pagination from "$lib/ui/Pagination.svelte";
 
     /** @type {import("./$types").PageData} */
     export let data;

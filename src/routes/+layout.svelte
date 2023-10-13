@@ -1,12 +1,12 @@
 <script>
     import "../app.css";
-    import Toast from "$lib/overlay/Toast.svelte";
-    import { toastStore } from "$lib/overlay/toast";
+    import Toast from "$lib/ui/Toast.svelte";
+    import { toastStore } from "$lib/ui/toast";
     import Button from "$lib/form/Button.svelte";
     import MenuIcon from "$lib/icons/MenuIcon.svelte";
-    import Drawer from "$lib/overlay/Drawer.svelte";
+    import Drawer from "$lib/ui/Drawer.svelte";
     import Nav from "./Nav.svelte";
-    import Avatar from "$lib/overlay/Avatar.svelte";
+    import Avatar from "$lib/ui/Avatar.svelte";
 
     let open = false;
     const navs = [

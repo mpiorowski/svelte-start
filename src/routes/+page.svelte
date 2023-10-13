@@ -8,11 +8,11 @@
     import Switch from "$lib/form/Switch.svelte";
     import Dropzone from "$lib/form/Dropzone.svelte";
     import FileInput from "$lib/form/FileInput.svelte";
-    import { showToast, toast } from "$lib/overlay/toast";
-    import Modal from "$lib/overlay/Modal.svelte";
-    import Drawer from "$lib/overlay/Drawer.svelte";
+    import { showToast, toast } from "$lib/ui/toast";
+    import Modal from "$lib/ui/Modal.svelte";
+    import Drawer from "$lib/ui/Drawer.svelte";
     import SelectMultiple from "$lib/form/SelectMultiple.svelte";
-    import Tooltip from "$lib/overlay/Tooltip.svelte";
+    import Tooltip from "$lib/ui/Tooltip.svelte";
     import { generateId } from "$lib/helpers";
 
     const countries = /** @type {const} */ ([
