@@ -5,6 +5,8 @@
     export let variant = "primary";
     /** @type {string | undefined} */
     export let form = undefined;
+    /** @type {string | undefined} */
+    export let formaction = undefined;
     /** @type {string} */
     export let href = "";
 
@@ -15,6 +17,7 @@
 {#if !href}
     <button
         on:click
+        {formaction}
         {form}
         {type}
         class="group inline-flex w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2

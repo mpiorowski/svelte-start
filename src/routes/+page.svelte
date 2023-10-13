@@ -176,7 +176,6 @@
             toast.success("Saved", "Your profile has been updated.");
         }
     }
-
 </script>
 
 {#if openModal}
@@ -186,7 +185,9 @@
         title="Deactivate your account"
         description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
     >
-        <Button type="button" variant="danger">Deactivate</Button>
+        <form method="post" action="?/deactive">
+            <Button variant="danger">Deactivate</Button>
+        </form>
     </Modal>
 {/if}
 {#if openDrawer}
