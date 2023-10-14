@@ -11,10 +11,11 @@
     export let name;
     /** @type {string} */
     export let label;
-    /** @type {string} */
+    /** @type {string | number} */
     export let value;
-    /** @type {readonly string[]} */
+    /** @type {readonly string[] | readonly number[]} */
     export let values;
+    const strValues = values.map((el) => el.toString());
     /** @type {readonly string[]} */
     export let options;
     /** @type {string} */
@@ -28,7 +29,7 @@
     let active = 0;
 
     $: if (open) {
-        active = values.indexOf(value);
+        active = strValues.indexOf(value.toString());
     }
 
     /**
@@ -116,7 +117,7 @@
             aria-expanded={open}
         >
             <span class="block truncate">
-                {options[values.indexOf(value)] ?? "\x80"}
+                {options[strValues.indexOf(value.toString())] ?? "\x80"}
             </span>
             <span
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
@@ -206,7 +207,7 @@
     </div>
     <p
         id="{name}-description"
-        class="text-xs leading-6 mb-2
+        class="mb-2 text-xs leading-6
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}
