@@ -4,7 +4,6 @@
     import Checkbox from "$lib/form/Checkbox.svelte";
     import Radio from "$lib/form/Radio.svelte";
     import Select from "$lib/form/Select.svelte";
-    import { z } from "zod";
     import Switch from "$lib/form/Switch.svelte";
     import Dropzone from "$lib/form/Dropzone.svelte";
     import FileInput from "$lib/form/FileInput.svelte";
@@ -14,80 +13,12 @@
     import SelectMultiple from "$lib/form/SelectMultiple.svelte";
     import Tooltip from "$lib/ui/Tooltip.svelte";
     import { generateId } from "$lib/utils";
+    import { countries, pushNotifications, schema, skills } from "./user";
 
-    const countries = /** @type {const} */ ([
-        "United States",
-        "Canada",
-        "Mexico",
-    ]);
-
-    const pushNotifications = /** @type {const} */ ([
-        "everything",
-        "same",
-        "none",
-    ]);
-    const skills = /** @type {const} */ ([
-        "Frontend Development",
-        "Backend Development",
-        "UI/UX Design",
-        "DevOps",
-        "Database Administration",
-        "Mobile Development",
-    ]);
-
-    const shema = z.object({
-        username: z.string().min(3, "Username is required").max(50),
-        about: z.string().min(3, "About is required").max(1000),
-        resume: z
-            .any()
-            .refine((file) => file instanceof File, "File is required")
-            .refine((file) => file.size > 0, "File is required")
-            .refine(
-                (file) => file.size < 5 * 1024 * 1024,
-                "File is too big, max 5MB",
-            )
-            .refine(
-                (file) => file.type === "application/pdf",
-                "File must be a PDF",
-            ),
-        coverPhoto: z
-            .any()
-            .refine((file) => file instanceof File, "File is required")
-            .refine((file) => file.size > 0, "File is required")
-            .refine(
-                (file) => file.size < 10 * 1024 * 1024,
-                "File is too big, max 10MB",
-            )
-            .refine(
-                (file) =>
-                    [
-                        "image/svg+xml",
-                        "image/png",
-                        "image/jpeg",
-                        "image/gif",
-                    ].includes(file.type),
-                "File must be an image",
-            ),
-        firstName: z.string().min(1, "First name is required").max(50),
-        lastName: z.string().min(1, "Last name is required").max(50),
-        email: z.string().email(),
-        country: z.enum(countries),
-        streetAddress: z.string().min(1, "Street address is required").max(100),
-        city: z.string().min(1, "City is required").max(50),
-        region: z.string().min(1, "Region is required").max(50),
-        postalCode: z.string().min(1, "Postal code is required").max(20),
-        comments: z.boolean(),
-        candidates: z.boolean(),
-        offers: z.boolean(),
-        pushNotifications: z.enum(pushNotifications),
-        skills: z.string().min(1, "Skills are required"),
-        available: z.boolean(),
-        b2b: z.boolean(),
-    });
+    /** @typedef {import("./types").User} User */
 
     /**
-     * @typedef {z.infer<typeof shema>} User
-     * @type {User}
+     * @type User
      */
     const user = {
         username: "",
@@ -127,7 +58,7 @@
     function handleSubmit(event) {
         fieldErrors = {};
         const form = new FormData(event.currentTarget);
-        const valid = shema.safeParse({
+        const valid = schema.safeParse({
             username: form.get("username"),
             about: form.get("about"),
             resume: form.get("resume"),
