@@ -21,7 +21,7 @@
     /** @type {string} */
     export let error = "";
     /** @type {string} */
-    export let helper = "\x80";
+    export let helper = "";
 
     /** @type {boolean} */
     let open = false;
@@ -97,7 +97,7 @@
     !IMPORTANT
     All styling and aria must be also added to Select.svelte
 -->
-<div>
+<div class="mb-2">
     <label
         id="{name}-label"
         class="block text-sm font-medium leading-6 text-gray-900"
@@ -207,7 +207,7 @@
     </div>
     <p
         id="{name}-description"
-        class="mb-2 text-xs leading-6
+        class="text-xs leading-6 inline-block
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}

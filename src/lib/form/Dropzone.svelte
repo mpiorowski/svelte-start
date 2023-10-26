@@ -12,7 +12,7 @@
     /** @type {string} */
     export let error = "";
     /** @type {string} */
-    export let helper = "\x80";
+    export let helper = "";
 
     /** @type {FileList} */
     let files;
@@ -31,7 +31,7 @@
     }
 </script>
 
-<div>
+<div class="mb-2">
     <div class="block text-sm font-medium leading-6 text-gray-900">
         {label}
     </div>
@@ -92,7 +92,7 @@
     </label>
     <p
         id="{name}-description"
-        class="text-xs leading-6
+        class="text-xs leading-6 inline-block
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}

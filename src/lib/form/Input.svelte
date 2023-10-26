@@ -16,7 +16,7 @@
     /** @type {string} */
     export let error = "";
     /** @type {string} */
-    export let helper = "\x80";
+    export let helper = "";
 
     /**
      * @param {HTMLInputElement} node
@@ -27,8 +27,11 @@
     }
 </script>
 
-<div>
-    <label for={name} class="block text-sm font-medium leading-6 text-gray-900">
+<div class="mb-2">
+    <label
+        for={name}
+        class="block text-sm font-medium leading-6 text-gray-900"
+    >
         {label}
     </label>
     <div class="mt-2">
@@ -61,7 +64,7 @@
     </div>
     <p
         id="{name}-description"
-        class="mb-2 text-xs leading-6
+        class="inline-block text-xs leading-6
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}

@@ -18,7 +18,7 @@
     /** @type {string} */
     export let error = "";
     /** @type {string} */
-    export let helper = "\x80";
+    export let helper = "";
 
     /** @type {boolean} */
     let open = false;
@@ -213,7 +213,7 @@
     </div>
     <p
         id="{name}-description"
-        class="text-xs leading-6
+        class="text-xs leading-6 inline-block 
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}
