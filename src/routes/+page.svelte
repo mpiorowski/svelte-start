@@ -14,6 +14,7 @@
     import Tooltip from "$lib/ui/Tooltip.svelte";
     import { generateId } from "$lib/utils";
     import { countries, pushNotifications, schema, skills } from "./user";
+    import SelectNative from "$lib/form/SelectNative.svelte";
 
     /** @typedef {import("./types").User} User */
 
@@ -281,6 +282,17 @@
                         values={countries}
                         options={countries}
                     />
+                    <SelectNative
+                        name="country-native"
+                        label="Country"
+                        bind:value={user.country}
+                    >
+                        {#each countries as country}
+                            <option value={country}>
+                                {country}
+                            </option>
+                        {/each}
+                    </SelectNative>
                 </div>
 
                 <div class="col-span-full">
