@@ -23,18 +23,16 @@
     }
 
     /** @type {string} */
-    let url;
+    export let url = "";
     $: if (file && file?.size > 0) {
         url = URL.createObjectURL(file);
-    } else {
-        url = "";
     }
 </script>
 
 <div class="mb-2">
-    <div class="block text-sm font-medium leading-6 text-gray-900">
+    <label for={name} class="block text-sm font-medium leading-6 text-gray-900">
         {label}
-    </div>
+    </label>
     <label
         id={label}
         for={name}
@@ -92,7 +90,7 @@
     </label>
     <p
         id="{name}-description"
-        class="text-xs leading-6 inline-block
+        class="inline-block text-xs leading-6
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}
