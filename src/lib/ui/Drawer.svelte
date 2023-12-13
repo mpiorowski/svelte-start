@@ -6,7 +6,7 @@
     import { fade, fly } from "svelte/transition";
 
     /** @type {boolean} */
-    export let open = false;
+    export let open;
     /** @type {string} */
     export let title;
     /** @type {"right" | "left"} */

@@ -6,7 +6,7 @@
     import { browser } from "$app/environment";
 
     /** @type {boolean} */
-    export let open = false;
+    export let open;
     /** @type {string} */
     export let title;
     /** @type {string} */
