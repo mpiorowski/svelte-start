@@ -20,9 +20,11 @@
     }
 
     $: if (browser) {
-        document.body.classList.toggle("no-scroll", open);
-        const scroll = document.getElementById("scroll");
-        scroll?.classList.toggle("scroll", open);
+        if (open) {
+            document.body.classList.add("no-scroll");
+        } else {
+            document.body.classList.remove("no-scroll");
+        }
     }
 
     /**

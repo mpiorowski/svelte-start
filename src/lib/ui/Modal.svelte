@@ -3,6 +3,7 @@
     import { fade, scale } from "svelte/transition";
     import { checkElement, generateId } from "$lib/utils";
     import Button from "$lib/form/Button.svelte";
+    import { browser } from "$app/environment";
 
     /** @type {boolean} */
     export let open = false;
@@ -18,6 +19,14 @@
 
     $: if (!open) {
         previous?.focus({ preventScroll: true });
+    }
+
+    $: if (browser) {
+        if (open) {
+            document.body.classList.add("no-scroll");
+        } else {
+            document.body.classList.remove("no-scroll");
+        }
     }
 
     /**
