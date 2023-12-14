@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { fail } from "@sveltejs/kit";
 import { pagination } from "$lib/ui/pagination";
-import data from "../../../data.json";
+import data from "./data.json";
 
 // const data = Array(122)
 //     .fill(0)
