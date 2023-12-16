@@ -123,7 +123,7 @@
     </Modal>
 {/if}
 {#if openDrawer}
-    <Drawer title="Info" bind:open={openDrawer}>
+    <Drawer title="Info" open={openDrawer} close={() => (openDrawer = false)}>
         {#each Array(20) as _}
             <p class="mb-10 text-sm text-gray-500">
                 {_} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas

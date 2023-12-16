@@ -11,6 +11,8 @@
     export let title;
     /** @type {"right" | "left"} */
     export let position = "right";
+    /** @type {() => void} */
+    export let close;
 
     /** @type {HTMLElement | undefined} */
     let previous = undefined;
@@ -50,7 +52,7 @@
          */
         function handleKeydown(event) {
             if (event.key === "Escape") {
-                open = false;
+                close();
             }
             if (event.key === "Tab") {
                 if (event.shiftKey) {
@@ -79,7 +81,7 @@
                 return;
             }
             if (!node.contains(event.target)) {
-                open = false;
+                close();
             }
         }
         document.addEventListener("keydown", handleKeydown);
@@ -163,7 +165,7 @@
                                     </h2>
                                     <div class="ml-3 flex h-7 items-center">
                                         <button
-                                            on:click={() => (open = false)}
+                                            on:click={close}
                                             type="button"
                                             class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus-visible:ring-2 focus-visible:ring-indigo-500"
                                         >
@@ -183,7 +185,7 @@
                         <div class="flex justify-end px-4 py-4">
                             <div class="inline-flex gap-4">
                                 <Button
-                                    on:click={() => (open = false)}
+                                    on:click={close}
                                     type="button"
                                     variant="secondary"
                                 >
