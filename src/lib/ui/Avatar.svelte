@@ -1,9 +1,11 @@
 <script>
-    import { checkElement } from "$lib/utils";
+    import { checkElement } from "$lib/helpers";
     import { scale } from "svelte/transition";
 
     /** @type {string} */
-    export let avatar = "";
+    export let email;
+    /** @type {string} */
+    export let avatar;
 
     /** @type {boolean} */
     let open = false;
@@ -66,50 +68,56 @@
         }
 
         node.addEventListener("keydown", handleKeydown);
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
 
         return {
             destroy() {
                 node.removeEventListener("keydown", handleKeydown);
-                document.removeEventListener("mousedown", handleClickOutside);
+                document.removeEventListener("click", handleClickOutside);
             },
         };
     }
 </script>
 
 <div class="relative inline-block text-left">
-    <button
-        type="button"
-        id="menu-button"
-        class="flex items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
-        aria-expanded={open}
-        aria-haspopup="true"
-        on:click={() => (open = !open)}
-    >
-        <span class="sr-only">User Settings</span>
-        {#if avatar}
-            <img class="h-8 w-8 rounded-full" src={avatar} alt="User Avatar" />
-        {:else}
-            <span class="relative inline-flex justify-center hover:cursor-pointer">
+    <div>
+        <button
+            type="button"
+            id="menu-button"
+            class="flex items-center justify-center rounded-full focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+            aria-expanded={open}
+            aria-haspopup="true"
+            on:click={() => (open = !open)}
+        >
+            <span class="absolute -inset-1.5" />
+            <span class="sr-only">User Settings</span>
+            <span
+                class="relative inline-flex justify-center hover:cursor-pointer"
+            >
                 <span
                     class="inline-flex h-8 w-8 overflow-hidden rounded-full bg-gray-100 transition hover:bg-gray-200"
                 >
-                    <svg
-                        class="h-full w-full text-gray-300"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                    {#if avatar}
+                        <img
+                            class="h-8 w-8 rounded-full"
+                            src={avatar}
+                            alt="Avatar"
                         />
-                    </svg>
+                    {:else}
+                        <svg
+                            class="h-full w-full text-gray-300"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                            />
+                        </svg>
+                    {/if}
                 </span>
-                <span
-                    class="absolute right-0 top-0 block h-3 w-3 rounded-full bg-green-300 ring-2 ring-white"
-                />
             </span>
-        {/if}
-    </button>
+        </button>
+    </div>
 
     {#if open}
         <!--
@@ -126,30 +134,40 @@
             use:portal
             in:scale={{ duration: 100, start: 0.95, opacity: 0 }}
             out:scale={{ duration: 75, start: 0.95, opacity: 0 }}
-            class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="absolute right-0 z-10 mt-2 min-w-[240px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             tabindex="-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
         >
             <div class="divide-y divide-gray-100">
+                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                <span
+                    class="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                >
+                    Signed in as <strong>{email}</strong>
+                </span>
                 <div class="py-1" role="none">
-                    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                     <a
                         on:mouseover={() => (active = 0)}
                         on:focus={() => (active = 0)}
-                        href="/account"
+                        on:click={() => (open = false)}
+                        href="/settings"
                         class="block px-4 py-2 text-sm text-gray-700
                     {active === 0 ? 'bg-gray-100 text-gray-900' : ''}"
                         role="menuitem"
                         tabindex="-1"
                         id="menu-item-0"
                     >
-                        Account settings
+                        Settings
                     </a>
                     <a
                         on:mouseover={() => (active = 1)}
                         on:focus={() => (active = 1)}
+                        on:click={() => (open = false)}
                         href="/support"
                         class="block px-4 py-2 text-sm text-gray-700
                     {active === 1 ? 'bg-gray-100 text-gray-900' : ''}"
@@ -159,24 +177,13 @@
                     >
                         Support
                     </a>
-                    <a
-                        on:mouseover={() => (active = 2)}
-                        on:focus={() => (active = 2)}
-                        href="/license"
-                        class="block px-4 py-2 text-sm text-gray-700
-                    {active === 2 ? 'bg-gray-100 text-gray-900' : ''}"
-                        role="menuitem"
-                        tabindex="-1"
-                        id="menu-item-2"
-                    >
-                        License
-                    </a>
                 </div>
                 <div class="py-1" role="none">
                     <button
                         on:click={() => (window.location.href = "/auth")}
                         on:mouseover={() => (active = 3)}
                         on:focus={() => (active = 3)}
+                        type="submit"
                         class="block w-full px-4 py-2 text-left text-sm text-gray-700
                         {active === 3 ? 'bg-gray-100 text-gray-900' : ''}"
                         role="menuitem"
