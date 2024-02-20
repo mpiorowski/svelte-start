@@ -1,5 +1,5 @@
 <script>
-    import { checkElement } from "$lib/helpers";
+    import { checkElement } from "$lib/utils";
     import { scale } from "svelte/transition";
 
     /** @type {string} */
