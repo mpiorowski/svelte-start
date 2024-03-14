@@ -117,9 +117,8 @@
         title="Deactivate your account"
         description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
     >
-        <form method="post" action="?/deactive">
-            <Button variant="danger">Deactivate</Button>
-        </form>
+        <form method="post" action="?/deactive" id="deactive" />
+        <Button variant="danger" form="deactive">Deactivate</Button>
     </Modal>
 {/if}
 {#if openDrawer}
@@ -188,6 +187,16 @@
                         rows={3}
                         helper="Write a few sentences about yourself."
                         error={fieldErrors.about?.join(" ") ?? ""}
+                    />
+                </div>
+
+                <div class="col-span-full">
+                    <SelectMultiple
+                        name="skills"
+                        label="Skills"
+                        bind:value={user.skills}
+                        options={skills}
+                        error={fieldErrors.skills?.join(" ") ?? ""}
                     />
                 </div>
 
@@ -456,15 +465,6 @@
             <p class="mt-1 text-sm leading-6 text-gray-600">
                 Share your profesional details so others can find you.
             </p>
-            <div class="mt-6">
-                <SelectMultiple
-                    name="skills"
-                    label="Skills"
-                    bind:value={user.skills}
-                    options={skills}
-                    error={fieldErrors.skills?.join(" ") ?? ""}
-                />
-            </div>
             <fieldset class="mt-6 space-y-6">
                 <legend class="text-sm font-semibold leading-6 text-gray-900">
                     Available for hire

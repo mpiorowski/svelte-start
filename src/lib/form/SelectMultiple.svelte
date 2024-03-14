@@ -92,6 +92,11 @@
             },
         };
     }
+
+    let search = "";
+    $: filtered = options.filter((o) =>
+        o.toLowerCase().includes(search.toLowerCase()),
+    );
 </script>
 
 <!-- 
@@ -157,7 +162,15 @@
                 aria-labelledby="{name}-label"
                 aria-activedescendant="{name}-option-{active}"
             >
-                {#each options as option, i}
+                <li class="relative cursor-default select-none">
+                    <input
+                        type="text"
+                        class="w-full border-b border-transparent border-b-gray-300 focus:border-transparent focus:border-b-indigo-600 focus:outline-none focus:ring-0"
+                        placeholder="Search"
+                        bind:value={search}
+                    />
+                </li>
+                {#each filtered as option, i}
                     <!-- This one is dealt with by the trapfocus function -->
                     <!-- TODO - check if this can be fixed -->
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -213,7 +226,7 @@
     </div>
     <p
         id="{name}-description"
-        class="text-xs leading-6 inline-block 
+        class="inline-block text-xs leading-6
         {error ? 'text-red-600' : 'text-gray-500'}"
     >
         {error || helper}
