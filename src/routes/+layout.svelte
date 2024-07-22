@@ -4,7 +4,7 @@
 	import { toastStore } from '$lib/ui/toast';
 </script>
 
-<div class="font-poppins h-full bg-gray-900 text-gray-50">
+<div class="h-full bg-gray-900 font-poppins text-gray-50">
 	<slot />
 </div>
 

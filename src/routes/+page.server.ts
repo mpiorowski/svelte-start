@@ -45,7 +45,7 @@ export const load: import('./$types').PageServerLoad = () => {
 		resume: 'resume.pdf',
 		cover: 'cover.pdf',
 		position: 'Frontend Developer',
-		skills: 'UI/UX Design | DevOps'
+		skills: 'UI/UX Design | DevOps',
 	};
 
 	return {
