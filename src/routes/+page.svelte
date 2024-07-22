@@ -16,6 +16,7 @@
 	import { generateId } from '$lib/helpers';
 	import Drawer from '$lib/ui/drawer.svelte';
 	import { extractError } from '$lib/errors';
+	import Dropdown from '$lib/ui/dropdown.svelte';
 
 	export let data: import('./$types').PageData;
 	export let form: import('./$types').ActionData;
@@ -53,6 +54,8 @@
 
 	let openDrawer = false;
 	let openModal = false;
+	let dropdownOpen = false;
+	let dropdownActive = 0;
 
 	let active = data.profile.active ? 'on' : 'off';
 	let email_notifications = data.profile.email_notifications.split(',');
@@ -73,6 +76,41 @@
 </Modal>
 
 <section class="h-full overflow-auto p-10">
+	<Dropdown bind:open={dropdownOpen} name="dropdown" bind:active={dropdownActive} position="right">
+		<svelte:fragment slot="button">
+			<Button type="button">Dropdown</Button>
+		</svelte:fragment>
+		<div slot="content" class="rounded bg-gray-800 p-4">
+			<a
+				on:mouseover={() => (dropdownActive = 0)}
+				on:focus={() => (dropdownActive = 0)}
+				on:click={() => (dropdownOpen = false)}
+				href="https://github.com/mpiorowski/sgsg"
+				target="_blank"
+				class="block px-4 py-2 text-sm text-gray-700
+                    {dropdownActive === 0 ? 'bg-gray-100 text-gray-900' : ''}"
+				role="menuitem"
+				tabindex="-1"
+				id="menu-item-0"
+			>
+				GitHub
+			</a>
+			<a
+				on:mouseover={() => (dropdownActive = 1)}
+				on:focus={() => (dropdownActive = 1)}
+				on:click={() => (dropdownOpen = false)}
+				href="https://www.upsend.app/"
+				target="_blank"
+				class="block px-4 py-2 text-sm text-gray-700
+                    {dropdownActive === 1 ? 'bg-gray-100 text-gray-900' : ''}"
+				role="menuitem"
+				tabindex="-1"
+				id="menu-item-1"
+			>
+				UpSend
+			</a>
+		</div>
+	</Dropdown>
 	<form
 		action="?/validate"
 		method="post"
