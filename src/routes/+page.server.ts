@@ -40,12 +40,12 @@ export const load: import('./$types').PageServerLoad = () => {
 		city: 'New York',
 		state: 'NY',
 		zip: '10001',
-		email_notifications: 'on',
-		push_notification: 'on',
+		email_notifications: 'comments,candidates',
+		push_notification: 'everything',
 		resume: 'resume.pdf',
 		cover: 'cover.pdf',
-		position: 'Software Engineer',
-		skills: 'JavaScript, TypeScript, React, Node.js',
+		position: 'Frontend Developer',
+		skills: 'UI/UX Design | DevOps'
 	};
 
 	return {

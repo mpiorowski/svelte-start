@@ -40,8 +40,9 @@
 		});
 	}
 
-	export const countries = ['Poland', 'United States', 'Canada', 'Mexico'] as const;
-	export const skills = [
+	const countries = ['Poland', 'United States', 'Canada', 'Mexico'] as const;
+	const positions = ['Frontend Developer', 'Backend Developer', 'Fullstack Developer'] as const;
+	const skills = [
 		'Frontend Development',
 		'Backend Development',
 		'UI/UX Design',
@@ -94,6 +95,7 @@
 					<h2 class="flex items-center gap-2 text-base font-semibold leading-7">
 						Profile
 						<Tooltip
+							auto
 							name="profile"
 							content="This information will be displayed publicly so be careful what you share."
 						>
@@ -167,7 +169,11 @@
 				<h2 class="flex items-center gap-2 text-base font-semibold leading-7">
 					Personal Information
 
-					<Tooltip name="personal" content="Use a permanent address where you can receive mail.">
+					<Tooltip
+						auto
+						name="personal"
+						content="Use a permanent address where you can receive mail."
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -268,6 +274,7 @@
 				<h2 class="flex items-center gap-2 text-base font-semibold leading-7">
 					Notifications
 					<Tooltip
+						auto
 						name="notifications"
 						content="We'll always let you know about important changes, but you pick what else you want to hear about."
 					>
@@ -357,6 +364,7 @@
 				<h2 class="flex items-center gap-2 text-base font-semibold leading-7">
 					Profesional Information
 					<Tooltip
+						auto
 						name="profesional"
 						content="Share your profesional details so others can find you."
 					>
@@ -384,8 +392,8 @@
 						name="position"
 						label="Position"
 						bind:value={data.profile.position}
-						values={['frontend', 'backend']}
-						options={['Frontend Developer', 'Backend Developer']}
+						values={positions}
+						options={positions}
 					/>
 				</div>
 				<SelectMultiple
