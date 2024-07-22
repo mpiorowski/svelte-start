@@ -78,7 +78,6 @@
 		method="post"
 		enctype="multipart/form-data"
 		class="max-w-2xl"
-		bind:this={form}
 		use:enhance={() => {
 			return async ({ result, update }) => {
 				if (result.type === 'success') {
