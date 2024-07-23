@@ -1,43 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <title>Svelte Start</title>
-        <meta
-            name="description"
-            content="Svelte Tailwind UI Starter Template"
-        />
-        <meta charset="utf-8" />
-        <link rel="icon" href="%sveltekit.assets%/favicon.png" />
-        <link
-            rel="preload"
-            href="%sveltekit.assets%/fonts/Poppins-Regular.ttf"
-            as="font"
-            crossorigin
-        />
-        <link
-            rel="preload"
-            href="%sveltekit.assets%/fonts/Poppins-Medium.ttf"
-            as="font"
-            crossorigin
-        />
-        <link
-            rel="preload"
-            href="%sveltekit.assets%/fonts/Poppins-SemiBold.ttf"
-            as="font"
-            crossorigin
-        />
-        <link
-            rel="preload"
-            href="%sveltekit.assets%/fonts/Poppins-Bold.ttf"
-            as="font"
-            crossorigin
-        />
-        <meta name="viewport" content="width=device-width" />
-        %sveltekit.head%
-    </head>
-    <body data-sveltekit-preload-data="hover">
-        <div style="display: contents">
-            <div id="scroll">%sveltekit.body%</div>
-        </div>
-    </body>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
 </html>
