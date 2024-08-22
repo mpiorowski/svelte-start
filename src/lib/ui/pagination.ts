@@ -37,7 +37,7 @@ function generatePaginationSchema(total: number, page: number, limit: number): n
 	return paginationArray;
 }
 
-export function pagination(
+export function usePagination(
 	total: number,
 	page: number,
 	limit: number,
