@@ -24,7 +24,7 @@
 					{toast.title}
 				</p>
 				{#if toast.description}
-					<div class="mt-1 text-sm text-gray-200">
+					<div class="mt-1 whitespace-pre-wrap text-sm text-gray-200">
 						{toast.description}
 					</div>
 				{/if}
