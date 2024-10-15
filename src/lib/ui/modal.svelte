@@ -2,7 +2,7 @@
 	import { cubicIn, cubicOut } from 'svelte/easing';
 	import { fade, scale } from 'svelte/transition';
 	import { browser } from '$app/environment';
-	import XIcon from '$lib/assets/icons/x-icon.svelte';
+	import XIcon from '$lib/assets/icons/x_icon.svelte';
 
 	export let name: string;
 	export let open: boolean;

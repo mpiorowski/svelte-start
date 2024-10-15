@@ -1,5 +1,5 @@
 <script lang="ts">
-	import XIcon from '$lib/assets/icons/x-icon.svelte';
+	import XIcon from '$lib/assets/icons/x_icon.svelte';
 	import { slide } from 'svelte/transition';
 
 	export let name: string;

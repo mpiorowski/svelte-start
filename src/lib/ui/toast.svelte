@@ -2,7 +2,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
 	import { toastStore, type Toast } from './toast.js';
-	import XIcon from '$lib/assets/icons/x-icon.svelte';
+	import XIcon from '$lib/assets/icons/x_icon.svelte';
 
 	export let toast: Toast;
 </script>

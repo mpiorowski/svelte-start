@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import XIcon from '$lib/assets/icons/x-icon.svelte';
+	import XIcon from '$lib/assets/icons/x_icon.svelte';
 	import { cubicIn, cubicOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
 

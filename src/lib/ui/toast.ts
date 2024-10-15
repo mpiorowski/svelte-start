@@ -22,36 +22,36 @@ export function showToast(toast: Toast): void {
 }
 
 export const toast = {
-    success: (title: string, description = "") =>
-        showToast({
-            id: generateId(),
-            title,
-            description,
-            type: "success",
-            duration: 5000,
-        }),
-    error: (title: string, description = "") =>
-        showToast({
-            id: generateId(),
-            title,
-            description,
-            type: "error",
-            duration: 5000,
-        }),
-    warning: (title: string, description = "") =>
-        showToast({
-            id: generateId(),
-            title,
-            description,
-            type: "warning",
-            duration: 5000,
-        }),
-    info: (title: string, description = "") =>
-        showToast({
-            id: generateId(),
-            title,
-            description,
-            type: "info",
-            duration: 5000,
-        }),
+	success: (title: string, description = '') =>
+		showToast({
+			id: generateId(),
+			title,
+			description,
+			type: 'success',
+			duration: 5000,
+		}),
+	error: (title: string, description = '') =>
+		showToast({
+			id: generateId(),
+			title,
+			description,
+			type: 'error',
+			duration: 5000,
+		}),
+	warning: (title: string, description = '') =>
+		showToast({
+			id: generateId(),
+			title,
+			description,
+			type: 'warning',
+			duration: 5000,
+		}),
+	info: (title: string, description = '') =>
+		showToast({
+			id: generateId(),
+			title,
+			description,
+			type: 'info',
+			duration: 5000,
+		}),
 };

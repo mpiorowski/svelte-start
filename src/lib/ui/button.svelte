@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LoadingIcon from '$lib/assets/icons/loading-icon.svelte';
+	import LoadingIcon from '$lib/assets/icons/loading_icon.svelte';
 
 	export let type: 'button' | 'submit' | 'reset' = 'submit';
 	export let variant: 'primary' | 'secondary' = 'primary';
