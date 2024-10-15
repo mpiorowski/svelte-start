@@ -21,42 +21,37 @@ export function showToast(toast: Toast): void {
 	}, toast.duration);
 }
 
-export const toast: {
-	success: (title: string, description?: string) => void;
-	error: (title: string, description?: string) => void;
-	warning: (title: string, description?: string) => void;
-	info: (title: string, description?: string) => void;
-} = {
-	success: (title, description = '') =>
-		showToast({
-			id: generateId(),
-			title,
-			description,
-			type: 'success',
-			duration: 5000,
-		}),
-	error: (title, description = '') =>
-		showToast({
-			id: generateId(),
-			title,
-			description,
-			type: 'error',
-			duration: 5000,
-		}),
-	warning: (title, description = '') =>
-		showToast({
-			id: generateId(),
-			title,
-			description,
-			type: 'warning',
-			duration: 5000,
-		}),
-	info: (title, description = '') =>
-		showToast({
-			id: generateId(),
-			title,
-			description,
-			type: 'info',
-			duration: 5000,
-		}),
+export const toast = {
+    success: (title: string, description = "") =>
+        showToast({
+            id: generateId(),
+            title,
+            description,
+            type: "success",
+            duration: 5000,
+        }),
+    error: (title: string, description = "") =>
+        showToast({
+            id: generateId(),
+            title,
+            description,
+            type: "error",
+            duration: 5000,
+        }),
+    warning: (title: string, description = "") =>
+        showToast({
+            id: generateId(),
+            title,
+            description,
+            type: "warning",
+            duration: 5000,
+        }),
+    info: (title: string, description = "") =>
+        showToast({
+            id: generateId(),
+            title,
+            description,
+            type: "info",
+            duration: 5000,
+        }),
 };
