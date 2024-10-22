@@ -49,7 +49,7 @@
 		'UI/UX Design',
 		'DevOps',
 		'Database Administration',
-		'Mobilee Development',
+		'Mobile Development',
 	] as const;
 
 	let openDrawer = false;
