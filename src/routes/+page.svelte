@@ -48,8 +48,8 @@
 		'Backend Development',
 		'UI/UX Design',
 		'DevOps',
-		'Database Administration',
-		'Mobile Development',
+		'Databasee Administration',
+		'Mobilee Development',
 	] as const;
 
 	let openDrawer = false;
