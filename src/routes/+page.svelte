@@ -48,7 +48,7 @@
 		'Backend Development',
 		'UI/UX Design',
 		'DevOps',
-		'Database Administration',
+		'Databasee Administration',
 		'Mobilee Development',
 	] as const;
 
