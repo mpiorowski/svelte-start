@@ -1,5 +1,4 @@
 import { writable, type Writable } from 'svelte/store';
-import { generateId } from '$lib/helpers';
 
 export type Toast = {
 	id: string;
@@ -24,7 +23,7 @@ export function showToast(toast: Toast): void {
 export const toast = {
 	success: (title: string, description = '') =>
 		showToast({
-			id: generateId(),
+			id: Symbol().toString(),
 			title,
 			description,
 			type: 'success',
@@ -32,7 +31,7 @@ export const toast = {
 		}),
 	error: (title: string, description = '') =>
 		showToast({
-			id: generateId(),
+			id: Symbol().toString(),
 			title,
 			description,
 			type: 'error',
@@ -40,7 +39,7 @@ export const toast = {
 		}),
 	warning: (title: string, description = '') =>
 		showToast({
-			id: generateId(),
+			id: Symbol().toString(),
 			title,
 			description,
 			type: 'warning',
@@ -48,7 +47,7 @@ export const toast = {
 		}),
 	info: (title: string, description = '') =>
 		showToast({
-			id: generateId(),
+			id: Symbol().toString(),
 			title,
 			description,
 			type: 'info',
